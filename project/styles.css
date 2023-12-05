@@ -3,6 +3,10 @@ body {
     flex-direction: row;
 }
 
+footer {
+    background-color: rgb(128, 128, 128);
+}
+
 nav {
     display: flex;
     flex-direction: column;
@@ -19,7 +23,7 @@ nav ul{
     list-style-type: none;
 }
 
-nav li a{
+nav li a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
