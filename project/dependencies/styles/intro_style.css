@@ -1,7 +1,4 @@
-* {
-    box-sizing: border-box;
-    border-style: solid;
-}
+
 
 .main-login-section {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -105,4 +102,27 @@ a{
 .img-wrapper{
     height: 5dvh;
     width: 5dvb;
+}
+
+.register-butt{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-style: none;
+    height: 5dvh;
+    width: 40dvb;
+    background-color: rgb(77, 77, 195);
+    border-radius: 20px;
+    color: white;
+}
+
+.sign-in-butt{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-style: solid;
+    height: 5dvh;
+    width: 40dvb;
+    background-color: transparent;
+    border-width: px;
+    border-color:  rgb(77, 77, 195);
+    border-radius: 20px;
 }
