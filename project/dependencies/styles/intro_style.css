@@ -1,9 +1,14 @@
-.main-login-section{
+* {
+    box-sizing: border-box;
+    border-style: solid;
+}
+
+.main-login-section {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   width: 100%;
-   height: 100dvh;
-   display: flex;
-   flex-direction: row;
+    width: 100dvb;
+    height: 100dvh;
+    display: flex;
+    flex-direction: row;
 }
 
 a{
@@ -20,39 +25,6 @@ a{
     color: white;
 }
 
-.text-input-wrappers-container{
-    position: absolute;
-    top: 0;
-    display: flex;
-    background-color: blue;
-    padding-top: 20px;
-    width: 50dvb;
-    justify-content: center;
-    align-items: center;
-}
-
-.input-wrapper{
-    width: 20dvb;
-    height: 5dvh;
-    border-radius: 2px;
-    border-width: 2px;
-    border-color: grey;
-}
-
-.login-input-wrapper{
-    background-color: red;
-    float: left;
-}
-
-.login-sect-2{
-    background-color:  white;
-    width: 50dvb;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
 
 .sect-1-labels{
     padding: 2dvh;
@@ -68,13 +40,69 @@ a{
     font-size: large;
 }
 
+.login-sect-2{
+    background-color:  white;
+    width: 50dvb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-input-wrappers-container{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+    padding-top: 20px;
+    width: 50dvb;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-wrapper{
+    border-style: solid;
+    width: 20dvb;
+    height: 5dvh;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: grey;
+}
+
+.login-input-wrapper{
+    /* background-color: red; */
+    float: left;
+}
+
+.header-sign-in-butt{
+    border-style: solid;
+    height: 5.5dvh;
+    width: 8dvb;
+    background-color: transparent;
+    border-width: px;
+    border-color:  rgb(77, 77, 195);
+    border-radius: 20px;
+}
+
+.header-sign-in-butt:hover{
+    border-color: transparent;
+    background-color: rgb(77, 77, 195);
+    color: white;
+}
+
 .other-login-elements-wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 50dvb;
-    background-color: yellow;
+    /* background-color: yellow; */
     align-items: center;
     justify-self: center
+}
+
+.img-wrapper{
+    height: 5dvh;
+    width: 5dvb;
 }
