@@ -1,29 +1,28 @@
 
-
 .main-login-section {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 100dvb;
-    height: 100dvh;
+    width: 100%;
+    height: 97dvh;
     display: flex;
     flex-direction: row;
 }
 
 a{
-    text-decoration: none;
+    text-decoration: solid;
+    color: rgb(77, 77, 195);
 }
 
 .login-sect-1{
+    width: 50%;
     background-color: rgb(77, 77, 195);
-    width: 50dvb;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     color: white;
+    padding-top: 20%;
+    padding-left: 12%;
 }
 
 
 .sect-1-labels{
+    list-style: none;
     padding: 2dvh;
 }
 
@@ -38,8 +37,8 @@ a{
 }
 
 .login-sect-2{
+    width: 50%;
     background-color:  white;
-    width: 50dvb;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,39 +46,43 @@ a{
 }
 
 .text-input-wrappers-container{
-    position: absolute;
-    top: 0;
+    padding-top: 1%;
     display: flex;
     flex-direction: column;
-    /* background-color: blue; */
-    padding-top: 20px;
-    width: 50dvb;
     justify-content: center;
-    align-items: center;
+    /* background-color: orange; */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 10%;
 }
 
+@media (max-width: 480px) {
+    .text-input-wrappers-container {
+        visibility: hidden;
+    }
+}
+
+
 .input-wrapper{
+    margin-left: 5px;
     border-style: solid;
-    width: 20dvb;
-    height: 5dvh;
+    width: 20%;
+    height: 30px;
     border-radius: 5px;
-    border-width: 2px;
+    border-width: 1px;
     border-color: grey;
 }
 
-.login-input-wrapper{
-    /* background-color: red; */
-    float: left;
-}
 
 .header-sign-in-butt{
-    border-style: solid;
-    height: 5.5dvh;
-    width: 8dvb;
-    background-color: transparent;
-    border-width: px;
-    border-color:  rgb(77, 77, 195);
-    border-radius: 20px;
+    border-style: none;
+    margin-left: 5px;
+    height: 50px;
+    width: 15%;
+    background-color: grey;
+    color: white;
+    border-radius: 50px;
 }
 
 .header-sign-in-butt:hover{
@@ -88,15 +91,12 @@ a{
     color: white;
 }
 
+
 .other-login-elements-wrapper{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 50dvb;
-    /* background-color: yellow; */
-    align-items: center;
-    justify-self: center
+    width: 50%;
 }
 
 .img-wrapper{
@@ -104,12 +104,17 @@ a{
     width: 5dvb;
 }
 
+.img-wrapper-small{
+    height: 3dvh;
+    width:  3dvb;
+}
+
 .register-butt{
     margin-bottom: 10px;
     margin-top: 10px;
     border-style: none;
-    height: 5dvh;
-    width: 40dvb;
+    height: 50px;
+    width: 100%;
     background-color: rgb(77, 77, 195);
     border-radius: 20px;
     color: white;
@@ -119,10 +124,23 @@ a{
     margin-bottom: 10px;
     margin-top: 10px;
     border-style: solid;
-    height: 5dvh;
-    width: 40dvb;
+    height: 50px;
+    width: 100%;
     background-color: transparent;
     border-width: px;
     border-color:  rgb(77, 77, 195);
     border-radius: 20px;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   height: 20px;
+}
+
+.fotter-chirpify{
+    /* right: 100%; */
+    margin: 5px;
 }
