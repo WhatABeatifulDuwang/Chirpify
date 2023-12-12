@@ -110,6 +110,11 @@ a{
 }
 
 .register-butt{
+    display: flex;
+    flex-direction: row;
+    padding-top: 3%;
+    align-content: center;
+    justify-content: center;
     margin-bottom: 10px;
     margin-top: 10px;
     border-style: none;
@@ -121,6 +126,11 @@ a{
 }
 
 .sign-in-butt{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    padding-top: 3%;
+    justify-content: center;
     margin-bottom: 10px;
     margin-top: 10px;
     border-style: solid;
