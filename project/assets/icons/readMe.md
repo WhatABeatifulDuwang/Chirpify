@@ -1,0 +1,1 @@
+<!-- ## Alleen voor svg bestanden en niks anders -->

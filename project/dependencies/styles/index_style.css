@@ -45,23 +45,6 @@ a{
     justify-content: center;
 }
 
-.text-input-wrappers-container{
-    padding-top: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* background-color: orange; */
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 10%;
-}
-
-@media (max-width: 480px) {
-    .text-input-wrappers-container {
-        visibility: hidden;
-    }
-}
 
 
 .input-wrapper{
@@ -73,24 +56,6 @@ a{
     border-width: 1px;
     border-color: grey;
 }
-
-
-.header-sign-in-butt{
-    border-style: none;
-    margin-left: 5px;
-    height: 50px;
-    width: 15%;
-    background-color: grey;
-    color: white;
-    border-radius: 50px;
-}
-
-.header-sign-in-butt:hover{
-    border-color: transparent;
-    background-color: rgb(77, 77, 195);
-    color: white;
-}
-
 
 .other-login-elements-wrapper{
     display: flex;
@@ -128,8 +93,8 @@ a{
 .sign-in-butt{
     display: flex;
     flex-direction: row;
-    align-content: center;
     padding-top: 3%;
+    align-content: center;
     justify-content: center;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -138,11 +103,11 @@ a{
     width: 100%;
     background-color: transparent;
     border-width: px;
-    border-color:  rgb(77, 77, 195);
     border-radius: 20px;
 }
 
 .footer{
+    background-color: black;
     display: flex;
     flex-direction: row;
    justify-content: center;
@@ -153,4 +118,53 @@ a{
 .fotter-chirpify{
     /* right: 100%; */
     margin: 5px;
+}
+
+#side-bar-frame{
+    background-color: rgb(33, 33, 56);
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#side-bar-frame-1{
+    display: flex;
+}
+
+/* login-sect-2-login-wrapper items*/
+.login-sect-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-field{
+    margin: 10px;
+    height: 5dvh;
+    padding-left: 10px;
+    background-color: transparent;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    width: 35dvb;
+};
+
+.header-sign-in-butt{
+    margin: 10px;
+    font-size: 15px;
+    border-style: none;
+    margin-left: 5px;
+    height: 50px;
+    width: 20dvb;
+    background-color: rgb(77, 77, 195);
+    color: white;
+    border-radius: 50px;
+}
+
+.header-sign-in-butt:hover{
+    border-color: transparent;
+    background-color: grey,
 }
