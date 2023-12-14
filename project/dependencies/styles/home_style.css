@@ -41,18 +41,20 @@ footer {
 }
 
 .tweetText{
-    width: 100%;
+    width: 100vw;
 }
 
 .userName{
     font-size: 18px;
     font-weight: bold;
+    display: inline;
 }
 
 .time_posted{
     font-size: 14px;
     font-style: italic;
     color: grey;
+    display: inline;
 }
 
 .tweetPost{
@@ -73,22 +75,22 @@ footer {
     border-style: none;
     color: white;
     font-weight: bold;
-    margin-left: 87.5%;
+    margin-left: 83.5%;
 }
 
 .profile_picture{
-    vertical-align: 8vw;
+    vertical-align: 14vw;
     width: 80px;
     height: 80px;
     margin-top: 1.5%;
 }
 
 .tweetPost textarea{
-    vertical-align: 8vw;
+    vertical-align: 2vw;
     resize: none;
     border-style: none;
-    width: 60%;
-    height: 18%;
+    width: 85%;
+    height: 25vh;
     padding: 20px;
 }
 
@@ -112,4 +114,11 @@ footer {
     background-color: white;
     width: 1vw;
     height: 2vh;
+}
+
+#imageIcon {
+    width: 50px;
+    height: 50px;
+    margin-left: 4vw;
+    margin-bottom: -5vh;
 }

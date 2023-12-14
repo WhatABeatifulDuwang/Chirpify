@@ -20,7 +20,10 @@
                     <label>
                         <textarea placeholder="What is happening?!"></textarea>
                     </label>
-                    <button type="submit" class="postButton">Post</button>
+                    <div>
+                        <img id="imageIcon" src="./assets/icons/add-image-icon.png" alt="imageIcon">
+                        <button type="submit" class="postButton">Post</button>
+                    </div>
                 </form>
             </div>
             <div class="tweetOverview">
@@ -33,19 +36,23 @@
                     */
                         ?>
                         <tr>
-                            <td class="userName">
-                                <p>@Name</p>
-                                <?php /* echo $tweet['userId']; */?>
-                            </td>
-                            <td class="time_posted">
-                                <p>2d</p>
-                                <?php /* echo $tweet['createdAt']; */?>
+                            <td>
+                                <?php
+                                // echo $tweet['userId'];
+                                // echo $tweet['createdAt'];
+                                    $name = "@Name";
+                                    $created_at = "2d";
+
+                                    //echo "<b>". $name . "</b>" . " " . "<i>" . $created_at. "</i>"
+                                ?>
+                                <p class="userName"><?php echo $name ?></p>
+                                <p class="time_posted"><?php echo $created_at ?></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="tweetText">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                <?php /* echo $tweet['message']; */?>
+                                <?php //echo $tweet['message']; ?>
                             </td>
                         </tr>
                     <tr>
@@ -55,9 +62,7 @@
                        </td>
                     </tr>
                     <?php
-                    /*
-                        }
-                      */
+                        //}
                     ?>
                 </table>
             </div>
