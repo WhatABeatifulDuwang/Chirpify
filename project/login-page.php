@@ -23,7 +23,7 @@
                 <br>
                 <input type="submit" value="Login" class="btn btn-primary">
             </form>
-            <p class="sign-up">Don't have an acount? <a href="placeholder-page.html">Sign Up</a></p>
+            <p class="sign-up">Don't have an acount? <a href="placeholder-page.php">Sign Up</a></p>
             <div id="confirmationMessage"></div>
         </div>
     </div>

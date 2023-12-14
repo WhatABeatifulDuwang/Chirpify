@@ -16,11 +16,11 @@
         <div class="column">
             <div class="tweetPost">
                 <form>
-                    <img src="./assets/imgs/profile-icon.png" alt="profile_picture">
+                    <img src="./assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
                     <label>
                         <textarea placeholder="What is happening?!"></textarea>
                     </label>
-                    <button type="submit">Post</button>
+                    <button type="submit" class="postButton">Post</button>
                 </form>
             </div>
             <div class="tweetOverview">

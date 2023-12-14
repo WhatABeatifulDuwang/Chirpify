@@ -13,12 +13,6 @@ footer {
     flex-wrap: wrap;
 }
 
-.navbar{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-}
-
 .column{
     display: flex;
     justify-content: flex-start;
@@ -42,8 +36,8 @@ footer {
     border-width: 2px;
     padding: 10px;
     height: 60%;
-    width: 90%;
-    margin: 0;
+    width: 78vw;
+    margin-left: 21vw;
 }
 
 .tweetText{
@@ -65,30 +59,32 @@ footer {
     border-style: solid;
     border-color: grey;
     border-width: 2px;
-    height: 45%;
-    width: 90%;
-    margin: 0;
+    max-width: 78vw;
+    margin-left: 21vw;
     padding: 10px;
 }
 
-.tweetPost button{
-    width: 4vw;
-    height: 5vh;
+.postButton{
+    position: relative;
+    width: 150px;
+    height: 45px;
     background-color: deepskyblue;
-    border-radius: 18px;
+    border-radius: 20px;
     border-style: none;
     color: white;
     font-weight: bold;
     margin-left: 87.5%;
 }
 
-.tweetPost img{
-    width: 2.5vw;
-    height: 5vh;
-    margin-bottom: 10%;
+.profile_picture{
+    vertical-align: 8vw;
+    width: 80px;
+    height: 80px;
+    margin-top: 1.5%;
 }
 
 .tweetPost textarea{
+    vertical-align: 8vw;
     resize: none;
     border-style: none;
     width: 60%;
