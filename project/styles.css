@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    overflow: hidden;
 }
 
 footer {
@@ -18,13 +17,14 @@ footer {
 
 .column{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     flex: 1;
 }
 
 nav {
     height: 100vh;
+    width: 25vw;
     background-color: deepskyblue;
     border-style: solid;
     border-width: 2px;
@@ -34,7 +34,7 @@ nav {
     list-style: none;
     margin: 0;
     padding: 25px;
-    overflow: hidden;
+    position: fixed;
 }
 
 nav ul{
@@ -73,7 +73,7 @@ nav li img{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: lightblue;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -94,15 +94,91 @@ nav li img{
 }
 
 .icon{
-    height: 24px;
-    width: 24px;
-    padding: 5px 5px 0 0;
+    height: 35px;
+    width: 35px;
 }
 
 #post{
-    background-color: royalblue;
-    border-radius: 12px;
+    background-color: black;
+    border-radius: 24px;
+    border-style: none;
+    color: white;
     margin-top: 50vh;
-    width: 80%;
+    width: 100%;
     font-size: 40px;
+}
+
+.tweetOverview{
+    border-style: solid;
+    border-color: grey;
+    border-width: 2px;
+    padding: 10px;
+    width: 70vw;
+    margin: 0;
+}
+
+.tweetText{
+    width: 100%;
+}
+
+.userName{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.time_posted{
+    font-size: 14px;
+    font-style: italic;
+    color: grey;
+}
+
+.tweetPost{
+    border-style: solid;
+    border-color: grey;
+    border-width: 2px;
+    height: 30vh;
+    width: 70vw;
+    margin: 0;
+    padding: 10px;
+}
+
+.tweetPost button{
+    width: 4vw;
+    height: 5vh;
+    background-color: deepskyblue;
+    border-radius: 18px;
+    border-style: none;
+    color: white;
+    font-weight: bold;
+    margin-left: 87.5%;
+}
+
+.tweetPost img{
+    width: 2.5vw;
+    height: 5vh;
+    margin-bottom: 10%;
+}
+
+.tweetPost textarea{
+    resize: none;
+    border-style: none;
+    width: 60vw;
+    height: 18vh;
+    padding: 20px;
+}
+
+.buttonBar{
+    width: 2.5vw;
+    height: 5vh;
+}
+
+.buttonBar img{
+    width: 1vw;
+    height: 2vh;
+    padding: 5px;
+}
+
+.buttonBar button{
+    border-style: none;
+    background-color: white;
 }
