@@ -1,10 +1,19 @@
-function likeTweet(){
+ function likeTweet(count) {
+    let counter = parseInt(count);
     let image = document.getElementById("heart");
 
-    if (image.src === "assets/icons/heart-empty-icon.png"){
-        image.src = "assets/icons/heart-full-icon.png"
-    }
-    else {
-        image.src = "assets/icons/heart-full-icon.png"
-    }
+    document.getElementById('heart').addEventListener("click", function(){
+        if (image.src === "../assets/icons/heart-empty-icon.png" && counter === 0) {
+            image.src = "../assets/icons/heart-full-icon.png";
+            counter += 1;
+
+            return counter;
+        }
+        else if(counter >= 1) {
+            image.src = "../assets/icons/heart-full-icon.png";
+            counter += 1;
+
+            return counter;
+        }
+    })
 }

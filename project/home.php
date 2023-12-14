@@ -16,7 +16,7 @@
         <div class="column">
             <div class="tweetPost">
                 <form>
-                    <img src="assets/imgs/profile-icon.png" alt="profile_picture">
+                    <img src="./assets/imgs/profile-icon.png" alt="profile_picture">
                     <label>
                         <textarea placeholder="What is happening?!"></textarea>
                     </label>
@@ -50,8 +50,8 @@
                         </tr>
                     <tr>
                        <td class="buttonBar">
-                           <img id="heart" src="assets/icons/heart-empty-icon.png" alt="empty_heart" onclick="likeTweet()">
-                           <img src="assets/icons/reply-icon.png" alt="reply">
+                           <img onclick="likeTweet(0)" id="heart" src="./assets/icons/heart-empty-icon.png" alt="empty_heart">
+                           <img src="./assets/icons/reply-icon.png" alt="reply">
                        </td>
                     </tr>
                     <?php
