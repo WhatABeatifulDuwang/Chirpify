@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="script" href="scripts.js">
+    <link rel="stylesheet" href="dependencies/styles/home_style.css">
+    <link rel="script" href="dependencies/scripts/home_script.js">
 </head>
 <body>
     <div class="row">
         <div class="column">
-            <?php include "navbar.php"?>
+            <?php include "navbar.html" ?>
         </div>
         <div class="column">
             <div class="tweetPost">
