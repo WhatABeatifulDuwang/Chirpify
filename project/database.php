@@ -173,4 +173,30 @@ class Database {
         $sql = "UPDATE users SET admin = ? WHERE id = ?";
         $this->execute($sql, [$isAdmin, $userId]);
     }
+
+    public function updateUser($userId, $name, $last_name, $email, $isAdmin) {
+        $sql = "UPDATE users SET name = ?, last_name = ?, email = ?, admin = ? WHERE id = ?";
+        $this->execute($sql, [$name, $last_name, $email, $isAdmin, $userId]);
+    }
+
+    // Placeholder method for deleting user
+    public function deleteUser($userId) {
+        // Implement your logic for deleting user and associated data here
+        $sqlDeleteUser = "DELETE FROM users WHERE id = ?";
+        $sqlDeleteTweets = "DELETE FROM tweets WHERE user = ?";
+        $this->execute($sqlDeleteUser, [$userId]);
+        $this->execute($sqlDeleteTweets, [$userId]);
+    }
+
+    // Placeholder method for updating tweet
+    public function updateTweet($tweetId, $message) {
+        $sql = "UPDATE tweets SET message = ? WHERE id = ?";
+        $this->execute($sql, [$message, $tweetId]);
+    }
+
+    // Placeholder method for deleting tweet
+    public function deleteTweet($tweetId) {
+        $sql = "DELETE FROM tweets WHERE id = ?";
+        $this->execute($sql, [$tweetId]);
+    }
 }
