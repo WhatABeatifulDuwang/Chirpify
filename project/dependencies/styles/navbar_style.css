@@ -75,3 +75,13 @@ nav li img{
     height: 35px;
     width: 35px;
 }
+
+#post{
+    background-color: black;
+    border-radius: 24px;
+    border-style: none;
+    color: white;
+    margin-top: 50%;
+    width: 80%;
+    font-size: 40px;
+}
