@@ -1,27 +1,27 @@
-<?php include_once('database.php');?>
+<?php include_once('../database.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="dependencies/styles/home_style.css">
-    <script src="dependencies/scripts/home_script.js"></script>
+    <link rel="stylesheet" href="../dependencies/styles/home_style.css">
+    <script src="../dependencies/scripts/home_script.js"></script>
 </head>
 <body>
     <div class="row">
         <div class="navbar">
-            <?php include "navbar.html" ?>
+            <?php include "../dependencies/components/nav_bars/navbar.html" ?>
         </div>
         <div class="column">
             <div class="tweetPost">
                 <form>
-                    <img src="./assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
+                    <img src="../assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
                     <label>
                         <textarea placeholder="What is happening?!"></textarea>
                     </label>
                     <div>
-                        <img id="imageIcon" src="./assets/icons/add-image-icon.png" alt="imageIcon">
+                        <img id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon">
                         <button type="submit" class="postButton">Post</button>
                     </div>
                 </form>
@@ -57,8 +57,8 @@
                         </tr>
                     <tr>
                        <td class="buttonBar">
-                           <img onclick="likeTweet(0)" id="heart" src="./assets/icons/heart-empty-icon.png" alt="empty_heart">
-                           <img src="./assets/icons/reply-icon.png" alt="reply">
+                           <img onclick="likeTweet(0)" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                           <img src="../assets/icons/reply-icon.png" alt="reply">
                        </td>
                     </tr>
                     <?php

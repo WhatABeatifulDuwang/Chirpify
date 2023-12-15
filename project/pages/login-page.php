@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="dependencies/scripts/login-page_script.js"></script>
-    <link rel="stylesheet" href="dependencies/styles/login-page_style.css">
+    <script src="../dependencies/scripts/login-page_script.js"></script>
+    <link rel="stylesheet" href="../dependencies/styles/login-page_style.css">
     <title></title>
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <div class="logo">
-                <img src="assets/imgs/logo_no_bg.png" alt="Chirpify Logo">
+                <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo">
             </div>
             <h1>Login into Chirpify</h1>
             <form id="loginForm" method="post">
