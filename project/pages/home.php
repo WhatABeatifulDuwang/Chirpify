@@ -11,6 +11,7 @@
 <body>
     <div class="row">
         <div class="navbar">
+            <!--  This line of code assigns the navigation bar component to this div.  -->
             <?php include "../dependencies/components/nav_bars/navbar.html" ?>
         </div>
         <div class="column">
@@ -19,6 +20,13 @@
                     <img src="../assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
                     <label>
                         <textarea placeholder="What is happening?!"></textarea>
+                        <?php
+                        // This method saves the data which has been written in the textarea and updates the database accordingly
+                        $data = "";
+
+                        // Creates new tweet
+                        $newTweet = "";
+                        ?>
                     </label>
                     <div>
                         <img id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon">
@@ -29,19 +37,20 @@
             <div class="tweetOverview">
                 <table>
                     <?php
-                    /*
-                        $tweets = getAllTweets();
-                        foreach($tweets as $tweet)
-                        {
-                    */
+                    // This method creates table data by retrieving tweet data from the database
+                    // $tweets = getAllTweets();
+                    // foreach($tweets as $tweet)
+                    // {
                         ?>
                         <tr>
                             <td>
                                 <?php
+                                // This method creates variables out of the database data
                                 // echo $tweet['userId'];
                                 // echo $tweet['createdAt'];
                                     $name = "@Name";
                                     $created_at = "2d";
+                                    $amountOfLikes = 0;
 
                                     //echo "<b>". $name . "</b>" . " " . "<i>" . $created_at. "</i>"
                                 ?>
@@ -57,7 +66,7 @@
                         </tr>
                     <tr>
                        <td class="buttonBar">
-                           <img onclick="likeTweet(0)" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                           <img onclick="likeTweet(<?php echo $amountOfLikes?>)" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
                            <img src="../assets/icons/reply-icon.png" alt="reply">
                        </td>
                     </tr>
