@@ -1,24 +1,11 @@
 body {
     font-family: Arial, sans-serif;
+    overflow: auto;
     margin: 0;
-    overflow-x: hidden;
 }
 
 footer {
     background-color: rgb(128, 128, 128);
-}
-
-.row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.column{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    flex: 1;
 }
 
 .tweetOverview{
@@ -26,13 +13,15 @@ footer {
     border-color: grey;
     border-width: 2px;
     padding: 10px;
-    height: 60%;
-    width: 78vw;
-    margin-left: 21vw;
+    height: 100%;
+}
+
+table{
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .tweetText{
-    width: 100vw;
 }
 
 .userName{
@@ -52,8 +41,6 @@ footer {
     border-style: solid;
     border-color: grey;
     border-width: 2px;
-    max-width: 78vw;
-    margin-left: 21vw;
     padding: 10px;
 }
 
@@ -70,46 +57,43 @@ footer {
 }
 
 .profile_picture{
-    vertical-align: 14vw;
+    vertical-align: 120px;
     width: 80px;
     height: 80px;
-    margin-top: 1.5%;
 }
 
 .tweetPost textarea{
-    vertical-align: 2vw;
+    vertical-align: 20px;
     resize: none;
     border-style: none;
+    height: 150px;
     width: 85%;
-    height: 25vh;
-    padding: 20px;
+    padding: 15px;
 }
 
 .buttonBar{
-    width: 2.5vw;
-    height: 5vh;
+    width: 20px;
+    height: 20px;
 }
 
 .buttonBar img{
-    width: 1vw;
-    height: 2vh;
+    width: 15px;
+    height: 15px;
     padding: 5px;
 }
 
 .buttonBar button{
     border-style: none;
-    background-color: white;
 }
 
 #heart{
     background-color: white;
-    width: 1vw;
-    height: 2vh;
+    width: 15px;
+    height: 15px;
 }
 
 #imageIcon {
     width: 50px;
     height: 50px;
-    margin-left: 4vw;
-    margin-bottom: -5vh;
+    margin-left: 80px;
 }
