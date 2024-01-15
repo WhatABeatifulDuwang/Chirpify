@@ -1,4 +1,4 @@
-<? //php include_once('../database.php');?>
+<?php include('../database.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,16 +10,13 @@
 </head>
 <body>
     <div class="tweetPost">
-        <form>
+        <form method="get">
             <img src="../assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
             <label>
-                <textarea placeholder="What is happening?!"></textarea>
+                <textarea placeholder="What is happening?!" name="message"></textarea>
                 <?php
-                // This method saves the data which has been written in the textarea and updates the database accordingly
-                $data = "";
-
-                // Creates new tweet
-                $newTweet = "";
+                // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
+                //createTweet($_GET["message"],1);
                 ?>
             </label>
             <div>
