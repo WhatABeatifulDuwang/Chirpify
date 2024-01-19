@@ -128,3 +128,15 @@ function getAllTweets() {
         return false;
     }
 }
+
+function getUserDataFromTweet(){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT * FROM tweets JOIN users ON tweets.user = users.id");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}

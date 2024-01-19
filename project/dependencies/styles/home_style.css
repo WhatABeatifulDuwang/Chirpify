@@ -21,9 +21,6 @@ table{
     min-height: 100%;
 }
 
-.tweetText{
-}
-
 .userName{
     font-size: 18px;
     font-weight: bold;
@@ -74,16 +71,13 @@ table{
 .buttonBar{
     width: 20px;
     height: 20px;
+    font-size: 5px;
 }
 
 .buttonBar img{
     width: 15px;
     height: 15px;
     padding: 5px;
-}
-
-.buttonBar button{
-    border-style: none;
 }
 
 #heart{
@@ -95,5 +89,4 @@ table{
 #imageIcon {
     width: 50px;
     height: 50px;
-    margin-left: 80px;
 }

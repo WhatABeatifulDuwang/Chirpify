@@ -1,17 +1,17 @@
- function likeTweet(count) {
-    let counter = parseInt(count);
+function likeTweet() {
     let image = document.getElementById("heart");
 
-     if (counter === 0) {
-         image.src = "../assets/icons/heart-full-icon.png";
-         counter += 1;
+    let isPressed = true;
 
-         return counter;
-     }
-     else {
-         image.src = "../assets/icons/heart-full-icon.png";
-         counter += 1;
-
-         return counter;
-     }
+    image.addEventListener("click", function () {
+        if (isPressed){
+            image.src = "../assets/icons/heart-full-icon.png";
+            console.log("true");
+        }
+        else{
+            image.src = "../assets/icons/heart-empty-icon.png";
+            console.log("false");
+        }
+        isPressed = !isPressed;
+    });
 }
