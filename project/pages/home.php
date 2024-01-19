@@ -10,18 +10,20 @@
 </head>
 <body>
     <div class="tweetPost">
-        <form method="post">
+        <form method="post" action="home.php" enctype="multipart/form-data">
             <img src="../assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
             <label>
                 <textarea placeholder="What is happening?!" name="message"></textarea>
                 <?php
                 // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
-                //createTweet($_POST["message"], 1);
+                if (isset($_POST['message'])){
+                    htmlentities(createTweet($_POST['message'], 1));
+                }
                 ?>
             </label>
             <div>
-                <img id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon">
-                <button type="submit" class="postButton">Post</button>
+                <input type="file" id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon" accept="image/*">
+                <button type="submit" value="send" class="postButton">Post</button>
             </div>
         </form>
     </div>
@@ -52,7 +54,11 @@
                 </tr>
                 <tr>
                     <td class="tweetText">
-                        <?php echo $tweet['message']; ?>
+                        <?php echo $tweet['message'];
+                        if (isset($tweet['image'])){
+                            echo $tweet['image'];
+                        }
+                        ?>
                     </td>
                 </tr>
             <tr>

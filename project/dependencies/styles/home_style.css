@@ -21,6 +21,12 @@ table{
     min-height: 100%;
 }
 
+tr, td{
+    border-style: solid;
+    border-color: grey;
+    border-width: 2px;
+}
+
 .userName{
     font-size: 18px;
     font-weight: bold;
