@@ -13,16 +13,16 @@
         <form method="post" action="home.php" enctype="multipart/form-data">
             <img src="../assets/imgs/profile-icon.png" alt="profile_picture" class="profile_picture">
             <label>
-                <textarea placeholder="What is happening?!" name="message"></textarea>
+                <textarea placeholder="What is happening?!" name="message" required></textarea>
                 <?php
                 // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
                 if (isset($_POST['message'])){
-                    htmlentities(createTweet($_POST['message'], 1));
+                    createTweet($_POST['message'], 1);
                 }
                 ?>
             </label>
             <div>
-                <input type="file" id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon" accept="image/*">
+                <img id="imageIcon" src="../assets/icons/add-image-icon.png" alt="imageIcon">
                 <button type="submit" value="send" class="postButton">Post</button>
             </div>
         </form>
@@ -43,6 +43,7 @@
 
                         //$name = $userData['users.name'];
                         $name = $tweet['user'];
+                        $id = $tweet['id'];
                         $created_at = $tweet['created_at'];
                         $amountOfLikes = $tweet['likes'];
 
@@ -50,25 +51,41 @@
                         ?>
                         <p class="userName"><?php echo $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
+                        <button onclick="editTweet()" class="edit">Edit</button>
                     </td>
                 </tr>
                 <tr>
                     <td class="tweetText">
-                        <?php echo $tweet['message'];
+                        <form method="post" action="home.php">
+                        <?php
+                        // This method makes a label and an input for the tweet containing message
+                        $message = $tweet['message'];
+                        echo "<label id='textLabel' for='updateText'>$message</label>";
+                        echo "<input type='hidden' id='updateText' name='updatedTweet' value=$message>";
+
+                        // This method checks if an image is set, if so it will be shown
                         if (isset($tweet['image'])){
                             echo $tweet['image'];
                         }
+
+                        // This method checks if the submit button has been pressed to update the database
+                        if (isset($_POST['submit'])){
+                            changeTweetData($id, $_POST['updatedTweet'], null);
+                        }
                         ?>
+                            <input type='hidden' id='submitButton' name="submit" value='Submit'>
+                        </form>
                     </td>
                 </tr>
             <tr>
                <td class="buttonBar">
                    <?php
+                   // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
                         if ($amountOfLikes != 0) {
                             echo $amountOfLikes;
                         }
                    ?>
-                   <img onclick="likeTweet()" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                   <img onclick="likeTweet()<?php //addLikeToTweet(1) ?>" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
                    <img src="../assets/icons/reply-icon.png" alt="reply">
                </td>
             </tr>

@@ -49,7 +49,7 @@ nav li img{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: lightblue;
+    background-color: rgb(77, 77, 195);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 

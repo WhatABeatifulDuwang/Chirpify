@@ -140,3 +140,15 @@ function getUserDataFromTweet(){
         return false;
     }
 }
+
+function addLikeToTweet($tweetId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("UPDATE tweets SET likes + 1 WHERE id = ?");
+        $stmt->execute($tweetId);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}

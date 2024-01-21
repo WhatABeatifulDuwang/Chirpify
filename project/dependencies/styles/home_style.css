@@ -12,19 +12,19 @@ footer {
     border-style: solid;
     border-color: grey;
     border-width: 2px;
-    padding: 10px;
+    padding: 5px;
     height: 100%;
 }
 
 table{
     min-width: 100%;
     min-height: 100%;
+    border-collapse: collapse;
 }
 
-tr, td{
-    border-style: solid;
-    border-color: grey;
-    border-width: 2px;
+tr:nth-child(3n):not(:last-child){
+    border-bottom: 2px solid #657786;
+    min-width: 100%;
 }
 
 .userName{
@@ -40,18 +40,31 @@ tr, td{
     display: inline;
 }
 
+.edit{
+    margin-left: 95%;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(77, 77, 195);
+    color: white;
+    width: 50px;
+    height: 20px;
+}
+
 .tweetPost{
     border-style: solid;
     border-color: grey;
     border-width: 2px;
+    background-color: white;
     padding: 10px;
+    position: sticky;
+    top: 0;
 }
 
 .postButton{
     position: relative;
     width: 150px;
     height: 45px;
-    background-color: deepskyblue;
+    background-color: rgb(77, 77, 195);
     border-radius: 20px;
     border-style: none;
     color: white;
@@ -77,7 +90,7 @@ tr, td{
 .buttonBar{
     width: 20px;
     height: 20px;
-    font-size: 5px;
+    font-size: 20px;
 }
 
 .buttonBar img{
@@ -95,4 +108,5 @@ tr, td{
 #imageIcon {
     width: 50px;
     height: 50px;
+    margin-left: 20px;
 }

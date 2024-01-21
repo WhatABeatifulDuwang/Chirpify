@@ -1,17 +1,20 @@
-function likeTweet() {
-    let image = document.getElementById("heart");
+let image_array = ["../assets/icons/heart-empty-icon.png", "../assets/icons/heart-full-icon.png"];
+i = 0;
 
-    let isPressed = true;
+function likeTweet(){
+    i++;
+    document.getElementById("heart").src = image_array[i];
+    if (i == image_array.length - 1) {
+        i = -1;
+    }
+}
 
-    image.addEventListener("click", function () {
-        if (isPressed){
-            image.src = "../assets/icons/heart-full-icon.png";
-            console.log("true");
-        }
-        else{
-            image.src = "../assets/icons/heart-empty-icon.png";
-            console.log("false");
-        }
-        isPressed = !isPressed;
-    });
+function editTweet(){
+    let message = document.getElementById("updateText");
+    let label = document.getElementById("textLabel");
+    let post = document.getElementById("submitButton");
+
+    message.setAttribute("type", "text");
+    label.style.display = "none";
+    post.setAttribute("type", "submit");
 }
