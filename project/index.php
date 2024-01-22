@@ -30,7 +30,7 @@
                 </li>
             </ul>
         </div>
-        <div id="side-bar-frame-1" class="login-sect-2 col-12 col-lg-6">
+        <div class="login-sect-2 col-12 col-lg-6">
             <div class="other-login-elements-wrapper">
                 <img src="./assets/imgs/logo.png" class="img-wrapper">
                 <p class="head-1">
@@ -39,16 +39,23 @@
                 <p class="head-2">
                     Join Chirpy today.
                 </p>
-                    <button class="register-butt" onclick="showPage('./dependencies/components/sidebars/registration_side_bar.html')">Sign up</button>
-                    <button class="sign-in-butt" onclick="showPage('pages/login-page.php')">Login</button>
+                    <a class="register-butt" href="pages/register_page.php">Sign up</a>
+                    <a class="sign-in-butt" href="pages/login_page.php">Login</a>
                 </div>
             </div>
-        <!-- login/signup sectie -->
-        <iframe src="./pages/login-page.php"  id="side-bar-frame" class="login-sect-2 col-12 col-lg-6"></iframe>
     </section>
 </body>
-<footer class="footer card-footer">   
-    <div class="footer-chirpify"><a href="https://www.techniekcollegerotterdam.nl/">©Chirpify 2023</a></div>
+<footer>
+    <ul id="foot">
+        <a href="#">About</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Developers</a>
+        <a href="#">Directory</a>
+        <a href="#">Settings</a>
+        <a id="copy"> &copy; 2024 Chirpify. Inc</a>
+
+    </ul>
+    
 </footer>
 </html>
 

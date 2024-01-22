@@ -11,11 +11,12 @@
     <div> 
         <div class="login-box"> 
            <div class="logo-wrapper">
-           <div class="logo"> 
+           </div>
+            <div class="container">
+           <h2>Log Into Chirpify</h2> 
+            <div class="logo"> 
                 <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo"> 
             </div> 
-           </div>
-            <h2>Login into Chirpify</h2> 
             <form id="loginForm" method="post"> 
                 <div class="content-text">Username or Email</div>
                 <input type="text" id="username" name="username" placeholder="Enter your username or email"> 
@@ -25,7 +26,8 @@
                 <br> 
                 <input type="submit" value="Login" class="btn btn-primary"> 
             </form> 
-            <p class="sign-up"> Don't have an acount? <a onclick="showPage('../dependencies\components\sidebars\login_side_bar.php')">Sign Up</a></p> 
+            </div>
+            <p class="sign-up" href="register_page.php"> Don't have an acount? <a>Sign Up</a></p> 
             <div id="confirmationMessage"></div> 
         </div> 
     </div> 
