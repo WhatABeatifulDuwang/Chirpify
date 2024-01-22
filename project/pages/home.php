@@ -1,4 +1,19 @@
-<?php include('../database.php');?>
+<?php include('../database.php');
+
+// This method checks if the submit button has been pressed to update the database
+if (isset($_POST['submit'])){
+    changeTweetData($_POST['id'], $_POST['updatedTweet'], null);
+}
+
+static $clicked = false;
+
+if (!$clicked){
+    if (isset($_POST['likeId'])){
+        addLikeToTweet($_POST['likeId']);
+        $clicked = true;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,54 +54,51 @@
                     <td>
                         <?php
                         // This method creates variables out of the database data
-                        $userData = getUserDataFromTweet();
-
-                        //$name = $userData['users.name'];
-                        $name = $tweet['user'];
                         $id = $tweet['id'];
+                        $userData = getUserDataFromTweet($id);
+                        $name = $userData['name'];
                         $created_at = $tweet['created_at'];
                         $amountOfLikes = $tweet['likes'];
-
-                        //echo "<b>". $name . "</b>" . " " . "<i>" . $created_at. "</i>"
                         ?>
-                        <p class="userName"><?php echo $name ?></p>
+                        <p class="userName"><?php echo '@' . $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
-                        <button onclick="editTweet()" class="edit">Edit</button>
+                        <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
                     </td>
                 </tr>
                 <tr>
                     <td class="tweetText">
                         <form method="post" action="home.php">
                         <?php
-                        // This method makes a label and an input for the tweet containing message
                         $message = $tweet['message'];
-                        echo "<label id='textLabel' for='updateText'>$message</label>";
-                        echo "<input type='hidden' id='updateText' name='updatedTweet' value=$message>";
 
                         // This method checks if an image is set, if so it will be shown
                         if (isset($tweet['image'])){
                             echo $tweet['image'];
                         }
-
-                        // This method checks if the submit button has been pressed to update the database
-                        if (isset($_POST['submit'])){
-                            changeTweetData($id, $_POST['updatedTweet'], null);
-                        }
                         ?>
-                            <input type='hidden' id='submitButton' name="submit" value='Submit'>
+                            <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 4) . $message?></label>
+                            <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
+                            <input type="hidden" name="id" value="<?php echo $id?>">
+                            <input type="hidden" id="<?php echo "submitButton" . $id?>" name="submit" value="Submit">
                         </form>
                     </td>
                 </tr>
             <tr>
                <td class="buttonBar">
-                   <?php
-                   // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
-                        if ($amountOfLikes != 0) {
-                            echo $amountOfLikes;
-                        }
-                   ?>
-                   <img onclick="likeTweet()<?php //addLikeToTweet(1) ?>" id="heart" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
-                   <img src="../assets/icons/reply-icon.png" alt="reply">
+                   <form method="post" action="home.php">
+                       <?php
+                       // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
+                       if ($amountOfLikes != 0) {
+                           echo $amountOfLikes;
+                       }
+                       else {
+                           echo "&nbsp;&nbsp";
+                       }
+                       ?>
+                       <input type="submit" id="hiddenButton" name="likeId" value="<?php echo $id?>">
+                       <img onclick="likeTweet(<?php echo $id?>);" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                       <img src="../assets/icons/reply-icon.png" alt="reply">
+                   </form>
                </td>
             </tr>
             <?php

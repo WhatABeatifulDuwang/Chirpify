@@ -129,13 +129,13 @@ function getAllTweets() {
     }
 }
 
-function getUserDataFromTweet(){
+function getUserDataFromTweet($tweetId){
     global $conn;
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM tweets JOIN users ON tweets.user = users.id");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $conn->prepare("SELECT name FROM tweets JOIN users ON tweets.user = users.id WHERE tweets.id=?");
+        $stmt->execute([$tweetId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;
     }
@@ -145,8 +145,8 @@ function addLikeToTweet($tweetId){
     global $conn;
 
     try {
-        $stmt = $conn->prepare("UPDATE tweets SET likes + 1 WHERE id = ?");
-        $stmt->execute($tweetId);
+        $stmt = $conn->prepare("UPDATE tweets SET likes = likes + 1 WHERE id = ?");
+        $stmt->execute([$tweetId]);
         return true;
     } catch (PDOException $e) {
         return false;
