@@ -152,3 +152,7 @@ function addLikeToTweet($tweetId){
         return false;
     }
 }
+
+function getCurrentUserId() {
+    return $_SESSION['userId'];
+}
