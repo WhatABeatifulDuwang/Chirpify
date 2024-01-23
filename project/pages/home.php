@@ -1,4 +1,6 @@
 <?php include('../database.php');
+session_start();
+$uid = $_SESSION['user']['id'];
 
 // This method checks if the submit button has been pressed to update the database
 if (isset($_POST['submit'])){
@@ -7,8 +9,9 @@ if (isset($_POST['submit'])){
 
 if (isset($_POST['likeId'])) {
     $userIdByLike = getUserIdByLike($_POST['likeId']);
-    if ($userIdByLike['liked_by_user_id'] != 1 ){
+    if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
+        updateLikedUserId($uid, $_POST['likeId']);
     }
     else{
         removeLikeFromTweet($_POST['likeId']);
@@ -33,7 +36,7 @@ if (isset($_POST['likeId'])) {
                 <?php
                 // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
                 if (isset($_POST['message'])){
-                    createTweet($_POST['message'], 1);
+                    createTweet($_POST['message'], $uid);
                 }
                 ?>
             </label>
@@ -63,7 +66,9 @@ if (isset($_POST['likeId'])) {
                         ?>
                         <p class="userName"><?php echo '@' . $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
+                        <?php if ($uid == $userData['id']): ?>
                         <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <tr>
@@ -85,8 +90,8 @@ if (isset($_POST['likeId'])) {
                     </td>
                 </tr>
             <tr>
-               <td class="buttonBar" onload="getLike(<?php echo "heart" . $id?>)">
-                   <form method="post" action="home.php" onclick="likeTweet(<?php echo $id?>);">
+               <td class="buttonBar">
+                   <form method="post" action="home.php">
                        <?php
                        // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
                        if ($amountOfLikes != 0) {
@@ -102,7 +107,7 @@ if (isset($_POST['likeId'])) {
                        }
                        ?>
                        <input type="submit" id="hiddenButton" name="likeId" value="<?php echo $id?>">
-                       <img onclick="this.src='../assets/icons/heart-full-icon.png'" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                       <img onclick="likeTweet(<?php echo $id?>);" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
                        <img src="../assets/icons/reply-icon.png" alt="reply">
                    </form>
                </td>

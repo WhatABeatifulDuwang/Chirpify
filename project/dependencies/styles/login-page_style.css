@@ -20,16 +20,42 @@ body {
 }
 
 .logo img {
-    width: 100%;
-    width: 60px;
+    height: 60px;
     
 }
 
-.logo-wrapper{
+.avatar-circle{
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-color: black;
+    border-width: 10px;
+    border-radius: 360px;
+    height: 150px;
+    width: 150px;
+    background-color: whitesmoke;
+}
+
+.avatar-circle-wrapper{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+/* .logo-wrapper{
+    height: 60;
+    max-width: 100%;
+    align-items: center;
+    margin-right: 20%;
+background-color: green;
+} */
+
+/* .logo-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
 h1 {
     color: #5943d6;
@@ -72,6 +98,13 @@ input {
     box-sizing: border-box;
     border: 1px solid #ccd6dd;
     border-radius: 8px;
+}
+
+.name-input-wrapper div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: red;
 }
 
 .btn {

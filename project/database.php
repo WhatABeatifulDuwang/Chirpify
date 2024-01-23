@@ -93,9 +93,21 @@ function getUserById($userId) {
     }
 }
 
-function getTweetById($tweetId) {
+// for seperation of concerns
+function getUserByNameAsId($name, $password) {
     global $conn;
 
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE ? AND password LIKE ?");
+        $stmt->execute([$name, $password]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getTweetById($tweetId) {
+    global $conn;
     try {
         $stmt = $conn->prepare("SELECT * FROM tweets WHERE id = ?");
         $stmt->execute([$tweetId]);
@@ -133,7 +145,7 @@ function getUserDataFromTweet($tweetId){
     global $conn;
 
     try {
-        $stmt = $conn->prepare("SELECT name FROM tweets JOIN users ON tweets.user = users.id WHERE tweets.id=?");
+        $stmt = $conn->prepare("SELECT * FROM tweets JOIN users ON tweets.user = users.id WHERE tweets.id=?");
         $stmt->execute([$tweetId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -161,6 +173,18 @@ function removeLikeFromTweet($tweetId){
         $stmt->execute([$tweetId]);
         return true;
     } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function updateLikedUserId($userId, $tweetId){
+    global $conn;
+
+    try{
+        $stmt = $conn->prepare("UPDATE tweets SET liked_by_user_id = ? WHERE id = ?");
+        $stmt->execute([$userId, $tweetId]);
+        return true;
+    } catch (PDOException $e){
         return false;
     }
 }
