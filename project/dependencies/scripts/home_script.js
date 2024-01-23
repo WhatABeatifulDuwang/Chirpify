@@ -7,11 +7,12 @@ function likeTweet(id){
     document.getElementById("heart" + id).src = image_array[i];
     if (i == image_array.length - 1) {
         i = -1;
+        event.preventDefault();
     }
 }
 
 function getLike(id){
-    document.getElementById("heart" + id).src = image_array[i];
+    return document.getElementById("heart" + id).src;
 }
 function editTweet(id){
     let message = document.getElementById("updateText" + id);

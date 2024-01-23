@@ -90,14 +90,19 @@ if (isset($_POST['likeId'])) {
                        <?php
                        // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
                        if ($amountOfLikes != 0) {
-                           echo $amountOfLikes;
+                           if ($amountOfLikes < 10 && $amountOfLikes > 0){
+                               echo $amountOfLikes . "&nbsp;&nbsp;";
+                           }
+                           else{
+                               echo $amountOfLikes;
+                           }
                        }
                        else {
-                           echo "&nbsp;&nbsp";
+                           echo str_repeat("&nbsp", 4);
                        }
                        ?>
                        <input type="submit" id="hiddenButton" name="likeId" value="<?php echo $id?>">
-                       <img id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                       <img onclick="this.src='../assets/icons/heart-full-icon.png'" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
                        <img src="../assets/icons/reply-icon.png" alt="reply">
                    </form>
                </td>
