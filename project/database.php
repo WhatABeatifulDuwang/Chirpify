@@ -145,9 +145,33 @@ function addLikeToTweet($tweetId){
     global $conn;
 
     try {
-        $stmt = $conn->prepare("UPDATE tweets SET likes = likes + 1 WHERE id = ?");
+        $stmt = $conn->prepare("UPDATE tweets SET likes = likes + 1, liked_by_user_id = tweets.user WHERE id = ?");
         $stmt->execute([$tweetId]);
         return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function removeLikeFromTweet($tweetId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("UPDATE tweets SET likes = likes - 1, liked_by_user_id = null WHERE id = ?");
+        $stmt->execute([$tweetId]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getUserIdByLike($tweetId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT tweets.liked_by_user_id FROM tweets WHERE id = ?");
+        $stmt->execute([$tweetId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;
     }

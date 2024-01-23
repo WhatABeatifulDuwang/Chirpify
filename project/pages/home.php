@@ -5,12 +5,13 @@ if (isset($_POST['submit'])){
     changeTweetData($_POST['id'], $_POST['updatedTweet'], null);
 }
 
-static $clicked = false;
-
-if (!$clicked){
-    if (isset($_POST['likeId'])){
+if (isset($_POST['likeId'])) {
+    $userIdByLike = getUserIdByLike($_POST['likeId']);
+    if ($userIdByLike['liked_by_user_id'] != 1 ){
         addLikeToTweet($_POST['likeId']);
-        $clicked = true;
+    }
+    else{
+        removeLikeFromTweet($_POST['likeId']);
     }
 }
 ?>
@@ -76,7 +77,7 @@ if (!$clicked){
                             echo $tweet['image'];
                         }
                         ?>
-                            <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 4) . $message?></label>
+                            <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 6) . $message?></label>
                             <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
                             <input type="hidden" name="id" value="<?php echo $id?>">
                             <input type="hidden" id="<?php echo "submitButton" . $id?>" name="submit" value="Submit">
@@ -84,8 +85,8 @@ if (!$clicked){
                     </td>
                 </tr>
             <tr>
-               <td class="buttonBar">
-                   <form method="post" action="home.php">
+               <td class="buttonBar" onload="getLike(<?php echo "heart" . $id?>)">
+                   <form method="post" action="home.php" onclick="likeTweet(<?php echo $id?>);">
                        <?php
                        // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
                        if ($amountOfLikes != 0) {
@@ -96,7 +97,7 @@ if (!$clicked){
                        }
                        ?>
                        <input type="submit" id="hiddenButton" name="likeId" value="<?php echo $id?>">
-                       <img onclick="likeTweet(<?php echo $id?>);" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                       <img id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
                        <img src="../assets/icons/reply-icon.png" alt="reply">
                    </form>
                </td>

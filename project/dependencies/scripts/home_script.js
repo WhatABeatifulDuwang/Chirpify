@@ -10,21 +10,13 @@ function likeTweet(id){
     }
 }
 
-function getImage(){
-    return image_array[i];
+function getLike(id){
+    document.getElementById("heart" + id).src = image_array[i];
 }
-
-document.onload = function (){
-    document.getElementById("heart").src = getImage();
-}
-
 function editTweet(id){
     let message = document.getElementById("updateText" + id);
     let label = document.getElementById("textLabel" + id);
     let post = document.getElementById("submitButton" + id);
-
-    console.log(message);
-    console.log(id);
 
     message.setAttribute("type", "text");
     label.style.display = "none";
