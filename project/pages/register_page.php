@@ -40,7 +40,7 @@
                  }
                 ?>
                 <?php if ($showLoginForm): ?>
-                    <img class="avatar-circle" src= <?$avatar??'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-1024.png'?>
+                   fff <!-- <img class="avatar-circle" id="avatar" src= <?$avatar?> -->
                        
                 </img>
                     <form id="SignUpForm" method="post">
