@@ -20,16 +20,19 @@
                     <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo"> 
                 </div>
                 <?php
+                session_start();
                 $showLoginForm = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-                    $validUsername = getUserByEmailAsId($username);
-                    var_dump($validUsername);
-                    $validPassword = "test";
+                    $user = getUserByNameAsId($username, $password);
+                    $validUsername = $user['name'];
+                    $validPassword = $user['password'];
 
                     if ($username == $validUsername && $password == $validPassword) {
+                        $userId = getUserByNameAsId($username, $password);
+                        $_SESSION["userId"] = '$userId';
                         header("Location: parent-page.php");
                         exit();
                     } else {

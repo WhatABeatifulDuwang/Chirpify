@@ -94,12 +94,12 @@ function getUserById($userId) {
 }
 
 // for seperation of concerns
-function getUserByEmailAsId($email) {
+function getUserByNameAsId($name, $password) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE ? AND password LIKE ?");
+        $stmt->execute([$name, $password]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;
