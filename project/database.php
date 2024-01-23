@@ -93,9 +93,21 @@ function getUserById($userId) {
     }
 }
 
-function getTweetById($tweetId) {
+// for seperation of concerns
+function getUserByNameAsId($name, $password) {
     global $conn;
 
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE ? AND password LIKE ?");
+        $stmt->execute([$name, $password]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getTweetById($tweetId) {
+    global $conn;
     try {
         $stmt = $conn->prepare("SELECT * FROM tweets WHERE id = ?");
         $stmt->execute([$tweetId]);
