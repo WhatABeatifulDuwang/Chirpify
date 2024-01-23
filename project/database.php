@@ -93,9 +93,21 @@ function getUserById($userId) {
     }
 }
 
-function getTweetById($tweetId) {
+// for seperation of concerns
+function getUserByEmailAsId($email) {
     global $conn;
 
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getTweetById($tweetId) {
+    global $conn;
     try {
         $stmt = $conn->prepare("SELECT * FROM tweets WHERE id = ?");
         $stmt->execute([$tweetId]);
