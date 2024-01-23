@@ -42,10 +42,8 @@
                 ?>
                 <?php if ($showLoginForm): ?>
                     <form id="loginForm" method="post">
-                        <div class="content-text">Username or Email</div>
                         <input type="text" id="username" name="username" placeholder="Enter your username or email"> 
                         <br> 
-                        <div class="content-text">Password</div>
                         <input type="password" id="password" name="password" placeholder="Enter your password"> 
                         <br> 
                         <input type="submit" value="Login" class="btn btn-primary" name="Submitted"> 
