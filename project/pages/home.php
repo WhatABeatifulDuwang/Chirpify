@@ -1,4 +1,6 @@
 <?php include('../database.php');
+session_start();
+$uid = $_SESSION['userId']['id'];
 
 // This method checks if the submit button has been pressed to update the database
 if (isset($_POST['submit'])){
@@ -7,7 +9,7 @@ if (isset($_POST['submit'])){
 
 if (isset($_POST['likeId'])) {
     $userIdByLike = getUserIdByLike($_POST['likeId']);
-    if ($userIdByLike['liked_by_user_id'] != 1 ){
+    if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
     }
     else{
@@ -33,7 +35,7 @@ if (isset($_POST['likeId'])) {
                 <?php
                 // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
                 if (isset($_POST['message'])){
-                    createTweet($_POST['message'], 1);
+                    createTweet($_POST['message'], $uid);
                 }
                 ?>
             </label>

@@ -32,7 +32,7 @@
 
                     if ($username == $validUsername && $password == $validPassword) {
                         $userId = getUserByNameAsId($username, $password);
-                        $_SESSION["userId"] = '$userId';
+                        $_SESSION["userId"] = $userId;
                         header("Location: parent-page.php");
                         exit();
                     } else {
