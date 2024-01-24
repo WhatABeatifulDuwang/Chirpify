@@ -202,5 +202,21 @@ function getUserIdByLike($tweetId){
 }
 
 function getCurrentUserId() {
-    return $_SESSION['userId'];
+    return $_SESSION['user']['id'];
+}
+
+function isCurrentUserAdmin() {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT admin FROM users WHERE id = ?");
+        $stmt->execute([getCurrentUserId()]);
+        if ($stmt->fetch(PDO::FETCH_ASSOC)['admin'] == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        return false;
+    }
 }

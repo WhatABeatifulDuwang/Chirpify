@@ -1,56 +1,22 @@
 <?php
 include_once('../database.php');
+session_start();
+$uid = $_SESSION['user']['id'];
 
-// Handle form submissions for creating users and updating tweets
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = new Database('127.0.0.1', 'root', '', 'chirpify');
-
-    if (isset($_POST['create_user'])) {
-        // Handle create user operation
-        $name = $_POST['new_name'];
-        $last_name = $_POST['new_last_name'];
-        $email = $_POST['new_email'];
-        $password = password_hash($_POST['new_password'], PASSWORD_DEFAULT); // Hash the password
-
-        $db->createUser($name, $last_name, $email, $password);
-    } elseif (isset($_POST['update_tweet'])) {
-        // Handle update tweet operation
-        $tweetId = $_POST['tweet_id'];
-        $message = $_POST['updated_tweet'];
-
-        $db->updateTweet($tweetId, $message);
+    if (isset($_POST['deleteUser'])) {
+        $userId = $_POST['id'];
+        deleteUser($userId);
+    } elseif (isset($_POST['deleteTweet'])) {
+        $tweetId = $_POST['id'];
+        deleteTweet($tweetId);
     }
 }
 
-// Handle form submissions for editing, deleting users, and deleting tweets
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit'])) {
-        $userId = $_POST['user_id'];
-
-        $db = new Database('127.0.0.1', 'root', '', 'chirpify');
-        $userData = $db->getUserById($userId);
-
-        $name = $_POST['name'];
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $isAdmin = isset($_POST['admin']) ? 1 : 0;
-
-        $db->updateUser($userId, $name, $last_name, $email, $isAdmin);
-    } elseif (isset($_POST['delete'])) {
-        // Handle delete user operation
-        $userId = $_POST['user_id'];
-
-        $db = new Database('127.0.0.1', 'root', '', 'chirpify');
-        $db->deleteUser($userId);
-    } elseif (isset($_POST['delete_tweet'])) {
-        // Handle delete tweet operation
-        $tweetId = $_POST['tweet_id'];
-
-        $db = new Database('127.0.0.1', 'root', '', 'chirpify');
-        $db->deleteTweet($tweetId);
-    }
+if (!isCurrentUserAdmin()) {
+    header('Location: ../pages/login_page.php');
+    exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -58,92 +24,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Page</title>
+    <title>Home</title>
     <link rel="stylesheet" href="../dependencies/styles/manage-page_style.css">
 </head>
 <body>
-<div class="admin-container">
-    <h1>Manage Panel</h1>
-
-    <!-- Form for creating a new user -->
-    <form method="post" action="">
-        <label for="new_name">Name:</label>
-        <input type="text" name="new_name" required>
-
-        <label for="new_last_name">Last Name:</label>
-        <input type="text" name="new_last_name" required>
-
-        <label for="new_email">Email:</label>
-        <input type="email" name="new_email" required>
-
-        <label for="new_password">Password:</label>
-        <input type="password" name="new_password" required>
-
-        <button type="submit" name="create_user">Create User</button>
-    </form>
-
-    <!-- Form for updating a tweet -->
-    <form method="post" action="">
-        <label for="updated_tweet">Updated Tweet:</label>
-        <textarea name="updated_tweet" rows="4" required></textarea>
-
-        <label for="tweet_id">Select Tweet:</label>
-        <select name="tweet_id" required>
+<div class="content">
+    <div class="userOverview">
+        <h1>Users</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Avatar</th>
+                <th>Admin</th>
+                <th>Actions</th>
+            </tr>
             <?php
-            // Display tweets in a dropdown for selecting a tweet to update
-            $tweets = $db->getAllTweets();
-
-            foreach ($tweets as $tweet) {
-                echo "<option value='{$tweet['id']}'>Tweet ID: {$tweet['id']}</option>";
+            // This method creates table data by retrieving user data from the database
+            $users = getAllUsers();
+            foreach($users as $user) {
+                ?>
+                <tr>
+                    <td><?php echo $user['id'] ?></td>
+                    <td><?php echo $user['username'] ?></td>
+                    <td><?php echo $user['email'] ?></td>
+                    <td><?php echo $user['password'] ?></td>
+                    <td><?php echo $user['avatar'] ?></td>
+                    <td><?php
+                        if ($user['admin'] == 1) {
+                            echo 'Yes';
+                        } else {
+                            echo 'No';
+                        }
+                        ?></td>
+                    <td>
+                        <form method="post" action="manage.php">
+                            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+                            <button type="submit" name="deleteUser" class="delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php
             }
             ?>
-        </select>
+        </table>
+    </div>
 
-        <button type="submit" name="update_tweet">Update Tweet</button>
-    </form>
-
-    <!-- Table for editing and deleting users and tweets -->
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Admin</th>
-            <th>Action</th>
-            <th>View Tweets</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        // Display users in a table for editing and deleting
-        $users = $db->getAllUsers();
-
-        foreach ($users as $user) {
-            echo "<tr>";
-            echo "<td>{$user['id']}</td>";
-            echo "<td>{$user['name']}</td>";
-            echo "<td>{$user['last_name']}</td>";
-            echo "<td>{$user['email']}</td>";
-            echo "<td><input type='checkbox' name='admin' " . ($user['admin'] ? 'checked' : '') . " disabled></td>";
-            echo "<td>
-                            <form method='post' action=''>
-                                <input type='hidden' name='user_id' value='{$user['id']}'>
-                                <input type='text' name='name' value='{$user['name']}'>
-                                <input type='text' name='last_name' value='{$user['last_name']}'>
-                                <input type='text' name='email' value='{$user['email']}'>
-                                <input type='checkbox' name='admin' " . ($user['admin'] ? 'checked' : '') . ">
-                                <button type='submit' name='edit'>Edit</button>
-                                <button type='submit' name='delete'>Delete</button>
-                            </form>
-                        </td>";
-            echo "<td><a href='view_tweets.php?user_id={$user['id']}'>View Tweets</a></td>";
-            echo "</tr>";
-        }
-        ?>
-        </tbody>
-    </table>
+    <div class="tweetOverview">
+        <h1>Tweets</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Image</th>
+                <th>User</th>
+                <th>Create date</th>
+                <th>Liked by</th>
+                <th>Likes</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+            // This method creates table data by retrieving user data from the database
+            $tweets = getAllTweets();
+            foreach($tweets as $tweet) {
+                ?>
+                <tr>
+                    <td><?php echo $tweet['id'] ?></td>
+                    <td><?php echo $tweet['message'] ?></td>
+                    <td><?php echo $tweet['image'] ?></td>
+                    <td><?php echo $tweet['user'] ?></td>
+                    <td><?php echo $tweet['created_at'] ?></td>
+                    <td><?php echo $tweet['liked_by_user_id'] ?></td>
+                    <td><?php echo $tweet['likes'] ?></td>
+                    <td>
+                        <form method="post" action="manage.php">
+                            <input type="hidden" name="id" value="<?php echo $tweet['id'] ?>">
+                            <button type="submit" name="deleteTweet" class="delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+    </div>
 </div>
 </body>
 </html>
