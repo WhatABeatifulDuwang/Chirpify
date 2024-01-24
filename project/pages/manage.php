@@ -13,8 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!isCurrentUserAdmin()) {
-    header('Location: ../pages/login_page.php');
+if (!isCurrentUserAdmin() && $uid != null) {
+    echo ("<script>
+    window.alert('You do not have access to this place');
+    window.location.href= '../pages/home.php';
+    </script>");
     exit();
 }
 ?>
