@@ -27,7 +27,7 @@
                     $username = $_POST["username"];
                     $password = $_POST["password"];
                     $user = getUserByNameAsId($username, $password);
-                    $validUsername = $user['name'];
+                    $validUsername = $user['username'];
                     $validPassword = $user['password'];
 
                     if ($username == $validUsername && $password == $validPassword) {
