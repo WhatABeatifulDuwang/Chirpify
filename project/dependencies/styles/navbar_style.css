@@ -46,6 +46,10 @@ nav li img{
     font-weight: bold;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
