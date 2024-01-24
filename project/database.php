@@ -220,3 +220,27 @@ function isCurrentUserAdmin() {
         return false;
     }
 }
+
+function getUserBioById($userId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT bio FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function editUserprofile($username, $bio) {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("UPDATE users SET username = ?, bio = ?");
+        $stmt->execute([$username, $bio]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
