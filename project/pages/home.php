@@ -60,7 +60,7 @@ if (isset($_POST['likeId'])) {
                         // This method creates variables out of the database data
                         $id = $tweet['id'];
                         $userData = getUserDataFromTweet($id);
-                        $name = $userData['name'];
+                        $name = $userData['username'];
                         $created_at = $tweet['created_at'];
                         $amountOfLikes = $tweet['likes'];
                         ?>

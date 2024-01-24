@@ -11,12 +11,12 @@ try {
     $conn = new PDO("mysql:host=$dbServername;dbname=$dbName", $dbUsername, $dbPassword);
 } catch (PDOException $e) {}
 
-function createUser($name, $last_name, $email, $password, $avatar = null, $admin = 0) {
+function createUser($username, $email, $password, $avatar = null, $admin = 0) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("INSERT INTO users (name, last_name, email, password, avatar, admin) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $last_name, $email, $password, $avatar, $admin]);
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password, avatar, admin) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$username, $email, $password, $avatar, $admin]);
         return $conn->lastInsertId();
     } catch (PDOException $e) {
         return false;
@@ -57,12 +57,12 @@ function deleteTweet($tweetId) {
     }
 }
 
-function changeUserData($userId, $name, $last_name, $email, $password, $admin, $avatar = null) {
+function changeUserData($userId, $username, $email, $password, $admin, $avatar = null) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("UPDATE users SET name = ?, last_name = ?, email = ?, password = ?, avatar = ?, admin = ? WHERE id = ?");
-        $stmt->execute([$name, $last_name, $email, $password, $avatar, $admin, $userId]);
+        $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, password = ?, avatar = ?, admin = ? WHERE id = ?");
+        $stmt->execute([$username, $email, $password, $avatar, $admin, $userId]);
         return true;
     } catch (PDOException $e) {
         return false;
@@ -94,12 +94,12 @@ function getUserById($userId) {
 }
 
 // for seperation of concerns
-function getUserByNameAsId($name, $password) {
+function getUserByNameAsId($username, $password) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE ? AND password LIKE ?");
-        $stmt->execute([$name, $password]);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username LIKE ? AND password LIKE ?");
+        $stmt->execute([$username, $password]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;
