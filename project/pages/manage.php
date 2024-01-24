@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!isCurrentUserAdmin()) {
+if (!isCurrentUserAdmin() && $uid != null) {
     header('Location: ../pages/login_page.php');
     exit();
 }
