@@ -14,7 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if (!isCurrentUserAdmin() && $uid != null) {
-    header('Location: ../pages/login_page.php');
+    echo ("<script>
+    window.alert('You do not have access to this place');
+    window.location.href= '../pages/home.php';
+    </script>");
     exit();
 }
 ?>
