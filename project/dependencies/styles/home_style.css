@@ -124,6 +124,6 @@ tr:nth-child(3n):not(:last-child){
 
 #hiddenButton{
     position:absolute;
-    left: 20px;
+    left: 35px;
     opacity: 0;
 }

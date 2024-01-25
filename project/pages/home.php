@@ -11,14 +11,17 @@ if (isset($_POST['submit'])){
 // If the submit button for like has been pressed, updates the database
 if (isset($_POST['likeId'])) {
     $userIdByLike = getUserIdByLike($_POST['likeId']);
+    
     // If the retrieved id from the like is not the same as the user id from session, it will add a like and update the liked user id
     if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
         updateLikedUserId($uid, $_POST['likeId']);
+        $imageUrl = "../assets/icons/heart-full-icon.png"; 
     }
     // If the id from the session is the same, it will remove a like from the database
     else{
         removeLikeFromTweet($_POST['likeId']);
+        $imageUrl = "../assets/icons/heart-empty-icon.png"; 
     }
 }
 
@@ -120,9 +123,15 @@ if (isset($_POST['deleteTweetId'])) {
                            // Repeats a string four times, which is a whitespace here
                            echo str_repeat("&nbsp", 4);
                        }
+                        // Checks if the user has liked their own comment, depending on the awnser change the img url
+                       if ($uid == $tweet["liked_by_user_id"]){
+                        $imageUrl = "../assets/icons/heart-full-icon.png"; 
+                       }else{
+                        $imageUrl = "../assets/icons/heart-empty-icon.png"; 
+                       }
                        ?>
                        <input type="submit" id="hiddenButton" name="likeId" value="<?php echo $id?>">
-                       <img onclick="likeTweet(<?php echo $id?>);" id="<?php echo "heart" . $id?>" src="../assets/icons/heart-empty-icon.png" alt="empty_heart">
+                       <img onclick="likeTweet(<?php echo $id?>);" id="<?php echo "heart" . $id?>" src="<?php echo $imageUrl; ?>" alt="empty_heart">
                        <img src="../assets/icons/reply-icon.png" alt="reply">
                    </form>
                </td>
