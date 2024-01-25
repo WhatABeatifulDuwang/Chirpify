@@ -20,37 +20,37 @@
                 <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo">
             </div>
             <div style="height: 40px;">
-            <?php
-            session_start();
-            $showLoginForm = true;
+                <?php
+                session_start();
+                $showLoginForm = true;
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $errorTextTag = "<div></div>";
-                $username = $_POST["username"];
-                $password = $_POST["password"];
-                $user = getUserByNameAsId($username, $password);
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $errorTextTag = "<div></div>";
+                    $username = $_POST["username"];
+                    $password = $_POST["password"];
+                    $user = getUserByNameAsId($username, $password);
 
-                if (!$user){
-                    $errorTextTag = "<div style='color:red' id='errorTextTag'>There is no account like this in our records. Please re-check the password and username and try again</div>";
-                    echo $errorTextTag;
-                    echo "<script>
+                    if (!$user){
+                        $errorTextTag = "<div style='color:red' id='errorTextTag'>There is no account like this in our records. Please re-check the password and username and try again</div>";
+                        echo $errorTextTag;
+                        echo "<script>
                             setTimeout(function() {
                                 document.getElementById('errorTextTag').innerHTML = '<div></div>';
                             }, 2000);
                           </script>";
-                } else{
-                    $validUsername = $user['username'];
-                    $validPassword = $user['password'];
+                    } else{
+                        $validUsername = $user['username'];
+                        $validPassword = $user['password'];
 
-                    if ($username == $validUsername && $password == $validPassword) {
-                        $userId = getUserByNameAsId($username, $password);
-                        $_SESSION["user"] = $userId;
-                        header("Location: parent-page.php");
-                        exit();
+                        if ($username == $validUsername && $password == $validPassword) {
+                            $userId = getUserByNameAsId($username, $password);
+                            $_SESSION["user"] = $userId;
+                            header("Location: parent-page.php");
+                            exit();
+                        }
                     }
                 }
-            }
-            ?>
+                ?>
             </div>
             <?php if ($showLoginForm): ?>
                 <form id="loginForm" method="post">
