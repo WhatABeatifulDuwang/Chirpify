@@ -12,6 +12,21 @@
     <title>©Chirpify|Signin</title>
 </head>
 <body>
+<?php
+            session_start();
+                // verwijder de html error tag na 2 seconden 
+                if ($_SESSION!=null) {
+                    $successTextTag = "<div style='color:white;background-color:green;border-radius:20px' id='successTextTag'>There is no account like this in our records. Please re-check the password and username and try again</div>";
+                    echo $errorTextTag;
+                    echo "<script>
+                            setTimeout(function() {
+                                document.getElementById('successTextTag').innerHTML = '<div></div>';
+                            }, 2000);
+                          </script>";
+                          header("Location: pages/parent-page.php");
+                          exit();
+                        }
+            ?>
     <script src="./dependencies/scripts/index_script.js"></script>
     <section class="main-login-section" id="login">
         <div class="login-sect-1 col-12 col-lg-6 d-none d-lg-block justify-content-center align-content-center">

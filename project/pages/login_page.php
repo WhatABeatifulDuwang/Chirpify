@@ -66,7 +66,7 @@
                     <input type="submit" value="Login" class="btn btn-primary" name="Submitted">
                 </form>
             <?php endif; ?>
-            <p class="sign-up" href="register_page.php"> Don't have an account? <a>Sign Up</a></p>
+            <p class="sign-up"> Don't have an account? <a href="register_page.php">Sign Up</a></p>
             <div id="confirmationMessage"></div>
             <div id="errorTextTag"></div>
         </div>
