@@ -21,6 +21,10 @@ if (isset($_POST['likeId'])) {
         removeLikeFromTweet($_POST['likeId']);
     }
 }
+
+if (isset($_POST['deleteTweetId'])) {
+    $deleteSuccess = deleteTweet($_POST['deleteTweetId']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +77,11 @@ if (isset($_POST['likeId'])) {
                         <?php
                         // This method checks if session user has the same id as the user id from the tweet, if so only show edit for those posts
                         if ($uid == $userData['id']): ?>
-                        <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
+                            <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
+                            <form method="post" action="home.php" onsubmit="return confirm('Are you sure?');">
+                                <input type="hidden" name="deleteTweetId" value="<?php echo $id ?>">
+                                <button type="submit" class="delete">Delete</button>
+                            </form>
                         <?php endif; ?>
                     </td>
                 </tr>
