@@ -24,20 +24,13 @@
             session_start();
             $showLoginForm = true;
 
-            $allUsers = getAllUsers();
-            foreach ($allUsers as $user) {
-                $emailCheck = $user['email'];
-            }
-
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $errorTextTag = "<div></div>";
                 $username = $_POST["username"];
                 $password = $_POST["password"];
                 $user = getUserByNameAsId($username, $password);
-                $validUsername = $user['username'];
-                $validPassword = $user['password'];
-                // verwijder de html error tag na 2 seconden als er een fout is
-                if ($emailCheck != $username || $username != '') {
+
+                if (!$user){
                     $errorTextTag = "<div style='color:red' id='errorTextTag'>There is no account like this in our records. Please re-check the password and username and try again</div>";
                     echo $errorTextTag;
                     echo "<script>
@@ -45,15 +38,17 @@
                                 document.getElementById('errorTextTag').innerHTML = '<div></div>';
                             }, 2000);
                           </script>";
-                }
+                } else{
+                    $validUsername = $user['username'];
+                    $validPassword = $user['password'];
 
-                if ($username == $validUsername && $password == $validPassword) {
-                    $userId = getUserByNameAsId($username, $password);
-                    $_SESSION["user"] = $userId;
-                    header("Location: parent-page.php");
-                    exit();
+                    if ($username == $validUsername && $password == $validPassword) {
+                        $userId = getUserByNameAsId($username, $password);
+                        $_SESSION["user"] = $userId;
+                        header("Location: parent-page.php");
+                        exit();
+                    }
                 }
-
             }
             ?>
             </div>
