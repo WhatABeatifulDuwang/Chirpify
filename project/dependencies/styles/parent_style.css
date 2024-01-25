@@ -23,3 +23,103 @@ body{
     justify-content: space-evenly;
     height: 100vh;
 }
+
+/* navbar */
+
+nav {
+    display: flex;
+    flex-direction: column;
+    min-width: 19%;
+    background-color: rgb(77, 77, 195);
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    font-size: 24px;
+    font-weight: bold;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    min-height: 100%;
+    position: fixed;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav li{
+    padding-bottom: 25px;
+}
+
+nav li a {
+    text-decoration: none;
+    vertical-align: middle;
+    position: relative;
+    width: 20%;
+    height: 20%;
+}
+
+nav li img{
+    vertical-align: middle;
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown button{
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(77, 77, 195);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-content a{
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 24px;
+    display: block;
+}
+
+.dropdown-content a:hover{
+    background-color: white;
+    width: 90%;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+.icon{
+    height: 35px;
+    width: 35px;
+}
+
+#post{
+    background-color: black;
+    border-radius: 24px;
+    border-style: none;
+    color: white;
+    margin-top: 50%;
+    width: 80%;
+    font-size: 40px;
+}
+
+button{
+    border-style: none;
+    background-color: transparent;
+    font-size: 24px;
+    font-weight: bold;
+}
