@@ -19,12 +19,13 @@
                 <h2>Create a new Chirpify account</h2> 
                
                 <?php
-                //custom alert
-                 function alert($message){
-                    echo "<script>alert($message)</script>";
-                  }
                 session_start();
                 $showLoginForm = true;
+
+                $allUsers = getAllUsers();
+                    foreach ($allUsers as $user){
+                            $emailCheck = $user['email'];
+                    }
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $avatar = $_POST["avatar"];
@@ -32,13 +33,10 @@
                     $email = $_POST["email"];
                     $password = $_POST["password"];
 
-                    $allUsers = getAllUsers();
-                    foreach ($allUsers as $user){
-                            $emailCheck = $user['email'];
-                    }
+                    
 
                 if ($emailCheck == $email){
-                    alert('The email already has been used');
+                    echo "<div style = 'color:red'>The email already has been used</div>";
                 } else{
                     //create user
                     createUser($username,$email,$password,null, $avatar);

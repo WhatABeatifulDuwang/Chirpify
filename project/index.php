@@ -12,6 +12,14 @@
     <title>©Chirpify|Signin</title>
 </head>
 <body>
+<?php
+            session_start();
+                // verwijder de html error tag na 2 seconden 
+                if ($_SESSION!=null) {
+                          header("Location: pages/parent-page.php");
+                          exit();
+                        }
+            ?>
     <script src="./dependencies/scripts/index_script.js"></script>
     <section class="main-login-section" id="login">
         <div class="login-sect-1 col-12 col-lg-6 d-none d-lg-block justify-content-center align-content-center">
