@@ -6,11 +6,22 @@ if (isset($_POST['submit'])){
     $newUsername = $_POST['new_username'];
     $newBio = $_POST['new_bio'];
 
-    $result = editUserprofile($newUsername, $newBio);
+    $result = editUserprofile($newUsername, $newBio, $uid);
     $_SESSION['user']['username'] = $newUsername;
 }
 
 $currentUsername = $_SESSION['user']['username'];
+
+if (isset($_POST['likeId'])) {
+    $userIdByLike = getUserIdByLike($_POST['likeId']);
+    if ($userIdByLike['liked_by_user_id'] != $uid ){
+        addLikeToTweet($_POST['likeId']);
+        updateLikedUserId($uid, $_POST['likeId']);
+    }
+    else{
+        removeLikeFromTweet($_POST['likeId']);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,14 +85,10 @@ $currentUsername = $_SESSION['user']['username'];
                         ?>
                         <p class="userName"><?php echo '@' . $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
-                        <?php if ($uid == $userData['id']): ?>
-                        <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
-                        <?php endif; ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="tweetText">
-                        <form method="post" action="home.php">
                         <?php
                         $message = $tweet['message'];
 
@@ -90,23 +97,20 @@ $currentUsername = $_SESSION['user']['username'];
                             echo $tweet['image'];
                         }
                         ?>
-                            <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 6) . $message?></label>
-                            <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
-                            <input type="hidden" name="id" value="<?php echo $id?>">
-                            <input type="hidden" id="<?php echo "submitButton" . $id?>" name="submit" value="Submit">
-                        </form>
+                        <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 6) . $message?></label>
+                        <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
                     </td>
                 </tr>
             <tr>
                <td class="buttonBar">
-                   <form method="post" action="home.php">
+                   <form method="post" action="profile-page.php">
                        <?php
                        // This method checks if the amount of likes has exceeded zero, if so the amount will be shown
                        if ($amountOfLikes != 0) {
                            if ($amountOfLikes < 10 && $amountOfLikes > 0){
                                echo $amountOfLikes . "&nbsp;&nbsp;";
                            }
-                           else{
+                                      else{
                                echo $amountOfLikes;
                            }
                        }

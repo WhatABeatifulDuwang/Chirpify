@@ -233,12 +233,12 @@ function getUserBioById($userId){
     }
 }
 
-function editUserprofile($username, $bio) {
+function editUserprofile($username, $bio, $userId) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("UPDATE users SET username = ?, bio = ?");
-        $stmt->execute([$username, $bio]);
+        $stmt = $conn->prepare("UPDATE users SET username = ?, bio = ? WHERE id = ?");
+        $stmt->execute([$username, $bio, $userId]);
         return true;
     } catch (PDOException $e) {
         return false;
