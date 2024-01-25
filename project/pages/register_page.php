@@ -34,18 +34,21 @@
 
                     $allUsers = getAllUsers();
                     foreach ($allUsers as $user){
-                        if ($user['email'] == $email){
-                            alert('The email already has been used');
-                        }else{
-                             //create user 
-                         createUser($username,$email,$password,null, $avatar);
-                         // navigate to home screen 
-                        header("Location: parent-page.php");
-                        exit();
-                 }
-                        }
+                            $emailCheck = $user['email'];
                     }
-                   
+
+                if ($emailCheck == $email){
+                    alert('The email already has been used');
+                } else{
+                    //create user
+                    createUser($username,$email,$password,null, $avatar);
+                    $userId = getUserByNameAsId($username, $password);
+                    $_SESSION["user"] = $userId;
+                    // navigate to home screen
+                    header("Location: parent-page.php");
+                    exit();
+                    }
+                }
                 ?>
                 <?php if ($showLoginForm): ?>
                     <form id="SignUpForm" method="post">
