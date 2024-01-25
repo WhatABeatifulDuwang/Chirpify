@@ -1,5 +1,6 @@
 <?php include('../database.php');
 session_start();
+// Creates an integer variable from the session
 $uid = $_SESSION['user']['id'];
 
 if (isset($_POST['submit'])){
@@ -12,12 +13,15 @@ if (isset($_POST['submit'])){
 
 $currentUsername = $_SESSION['user']['username'];
 
+// If the submit button for like has been pressed, updates the database
 if (isset($_POST['likeId'])) {
     $userIdByLike = getUserIdByLike($_POST['likeId']);
+    // If the retrieved id from the like is not the same as the user id from session, it will add a like and update the liked user id
     if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
         updateLikedUserId($uid, $_POST['likeId']);
     }
+    // If the id from the session is the same, it will remove a like from the database
     else{
         removeLikeFromTweet($_POST['likeId']);
     }
@@ -65,8 +69,9 @@ if (isset($_POST['likeId'])) {
         <div class="tweet">
         <table>
             <?php
-            // This method creates table data by retrieving tweet data from the current user from the database
+            // This method creates table data by retrieving tweet data from the database
             $tweets = getAllTweets();
+            // This method filters the tweets based on current session user
             $currentUserTweets = array_filter($tweets, function($tweet) use ($uid) {
                 return $tweet['user'] == $uid;
             });        
@@ -114,6 +119,7 @@ if (isset($_POST['likeId'])) {
                                echo $amountOfLikes;
                            }
                        }
+                       // Repeats a string four times, which is a whitespace here
                        else {
                            echo str_repeat("&nbsp", 4);
                        }

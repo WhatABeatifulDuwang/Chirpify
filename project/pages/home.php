@@ -54,9 +54,9 @@ if (isset($_POST['likeId'])) {
         <table>
             <?php
             // This method creates table data by retrieving tweet data from the database
-             $tweets = getAllTweets();
-             foreach($tweets as $tweet)
-             {
+            $tweets = getAllTweets();
+            foreach($tweets as $tweet)
+            {
                 ?>
                 <tr>
                     <td>
@@ -70,7 +70,9 @@ if (isset($_POST['likeId'])) {
                         ?>
                         <p class="userName"><?php echo '@' . $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
-                        <?php if ($uid == $userData['id']): ?>
+                        <?php
+                        // This method checks if session user has the same id as the user id from the tweet, if so only show edit for those posts
+                        if ($uid == $userData['id']): ?>
                         <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
                         <?php endif; ?>
                     </td>
@@ -78,14 +80,14 @@ if (isset($_POST['likeId'])) {
                 <tr>
                     <td class="tweetText">
                         <form method="post" action="home.php">
-                        <?php
-                        $message = $tweet['message'];
+                            <?php
+                            $message = $tweet['message'];
 
-                        // This method checks if an image is set, if so it will be shown
-                        if (isset($tweet['image'])){
-                            echo $tweet['image'];
-                        }
-                        ?>
+                            // This method checks if an image is set, if so it will be shown
+                            if (isset($tweet['image'])){
+                                echo $tweet['image'];
+                            }
+                            ?>
                             <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 6) . $message?></label>
                             <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
                             <input type="hidden" name="id" value="<?php echo $id?>">
