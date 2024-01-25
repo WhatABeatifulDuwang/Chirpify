@@ -38,15 +38,30 @@ th {
     border-radius: 3px;
 }
 
+.edit {
+    background-color: #006dff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
 .editUserForm {
-    visibility: hidden;
+    display: none;
     margin-top: 20px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Set a high value */
-    position: relative;
+    z-index: 1000;
+    width: 80%;
+    background-color: white;
+    position: absolute;
 }
 
 .editUserForm h2 {
@@ -73,4 +88,12 @@ th {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 30px;
 }

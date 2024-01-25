@@ -11,13 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tweetId = $_POST['id'];
         deleteTweet($tweetId);
     } elseif (isset($_POST['editUserDetails'])) {
-        $userId = $_POST['id'];
+        $userId = $_POST['idFrom'];
         $newUsername = $_POST['newUsername'];
-        $newEmail = $_POST['newEmail'];
-        $newPassword = $_POST['newPassword'];
+        $newBio = $_POST['newBio'];
         $newAdmin = isset($_POST['newAdmin']) ? 1 : 0;
 
-        changeUserData($userId, $newUsername, $newEmail, $newPassword, $newAdmin);
+        editUserprofileWithAdmin($newUsername, $newBio, $newAdmin, $userId);
     }
 }
 
@@ -37,28 +36,28 @@ if (!isCurrentUserAdmin() && $uid != null) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="../dependencies/styles/manage-page_style.css">
+    <script src="../dependencies/scripts/manage_script.js"></script>
 </head>
 <body>
     <div class="content">
-        <div class="editUserForm">
+        <div class="editUserForm" id="editUserForm">
             <h2>Edit User Details</h2>
             <form method="post" action="manage.php">
-                <label for="currentId">Id of user:</label>
-                <input type="text" name="id" required>
+                <input type="hidden" name="idFrom">
 
                 <label for="newUsername">New username:</label>
                 <input type="text" id="newUsername" name="newUsername" required>
 
-                <label for="newEmail">New email:</label>
-                <input type="email" id="newEmail" name="newEmail" required>
-
-                <label for="newPassword">New password:</label>
-                <input type="password" id="newPassword" name="newPassword" required>
+                <label for="newBio">New bio:</label>
+                <input type="text" id="newBio" name="newBio" required>
 
                 <label for="newAdmin">Is admin:</label>
                 <input type="checkbox" id="newAdmin" name="newAdmin">
 
-                <button type="submit" name="editUserDetails">Save</button>
+                <div class="buttons">
+                    <button type="submit" name="editUserDetails">Save</button>
+                    <button onclick="hideUserEditForm()" name="cancelUserDetails" style="background-color: rgb(255,87,87);">Cancel</button>
+                </div>
             </form>
         </div>
 
@@ -97,7 +96,7 @@ if (!isCurrentUserAdmin() && $uid != null) {
                                 <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
                                 <button type="submit" name="deleteUser" class="delete">Delete</button>
                             </form>
-                            <button class="edit" onsubmit="">Edit</button>
+                            <button class="edit" onclick=showUserEditForm(<?php echo $user['id']?>) >Edit</button>
                         </td>
                     </tr>
                     <?php

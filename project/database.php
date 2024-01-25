@@ -217,3 +217,15 @@ function editUserprofile($username, $bio, $userId) {
         return false;
     }
 }
+
+function editUserprofileWithAdmin($username, $bio, $userId, $admin) {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("UPDATE users SET username = ?, bio = ?, admin = ? WHERE id = ?");
+        $stmt->execute([$username, $bio, $admin, $userId]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
