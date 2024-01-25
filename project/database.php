@@ -57,18 +57,6 @@ function deleteTweet($tweetId) {
     }
 }
 
-function changeUserData($userId, $username, $email, $password, $admin, $avatar = null) {
-    global $conn;
-
-    try {
-        $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, password = ?, avatar = ?, admin = ? WHERE id = ?");
-        $stmt->execute([$username, $email, $password, $avatar, $admin, $userId]);
-        return true;
-    } catch (PDOException $e) {
-        return false;
-    }
-}
-
 function changeTweetData($tweetId, $message, $image = null) {
     global $conn;
 
@@ -81,18 +69,6 @@ function changeTweetData($tweetId, $message, $image = null) {
     }
 }
 
-function getUserById($userId) {
-    global $conn;
-
-    try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->execute([$userId]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        return false;
-    }
-}
-
 // for seperation of concerns
 function getUserByNameAsId($username, $password) {
     global $conn;
@@ -100,17 +76,6 @@ function getUserByNameAsId($username, $password) {
     try {
         $stmt = $conn->prepare("SELECT * FROM users WHERE username LIKE ? AND password LIKE ?");
         $stmt->execute([$username, $password]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        return false;
-    }
-}
-
-function getTweetById($tweetId) {
-    global $conn;
-    try {
-        $stmt = $conn->prepare("SELECT * FROM tweets WHERE id = ?");
-        $stmt->execute([$tweetId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;
@@ -141,6 +106,7 @@ function getAllTweets() {
     }
 }
 
+// Retrieves the user data from a tweet based on tweet id
 function getUserDataFromTweet($tweetId){
     global $conn;
 
@@ -153,6 +119,7 @@ function getUserDataFromTweet($tweetId){
     }
 }
 
+// Adds a like to the database based on tweet id
 function addLikeToTweet($tweetId){
     global $conn;
 
@@ -165,6 +132,7 @@ function addLikeToTweet($tweetId){
     }
 }
 
+// Removes a like from the database based on tweet id
 function removeLikeFromTweet($tweetId){
     global $conn;
 
@@ -177,6 +145,7 @@ function removeLikeFromTweet($tweetId){
     }
 }
 
+// This query updates the user id on the liked tweet
 function updateLikedUserId($userId, $tweetId){
     global $conn;
 
@@ -189,6 +158,7 @@ function updateLikedUserId($userId, $tweetId){
     }
 }
 
+// This query retrieves the id from user who liked the tweet
 function getUserIdByLike($tweetId){
     global $conn;
 
