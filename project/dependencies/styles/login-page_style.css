@@ -8,6 +8,9 @@ body {
     height: 100vh;
 }
 
+.errorMsg{
+    color: red;
+}
 
 .container {
     width: 100%;
