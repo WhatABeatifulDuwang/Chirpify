@@ -1,5 +1,6 @@
 <?php include('../database.php');
 session_start();
+// Creates an integer variable from the session
 $uid = $_SESSION['user']['id'];
 
 // This method checks if the submit button has been pressed to update the database
@@ -7,12 +8,15 @@ if (isset($_POST['submit'])){
     changeTweetData($_POST['id'], $_POST['updatedTweet'], null);
 }
 
+// If the submit button for like has been pressed, updates the database
 if (isset($_POST['likeId'])) {
     $userIdByLike = getUserIdByLike($_POST['likeId']);
+    // If the retrieved id from the like is not the same as the user id from session, it will add a like and update the liked user id
     if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
         updateLikedUserId($uid, $_POST['likeId']);
     }
+    // If the id from the session is the same, it will remove a like from the database
     else{
         removeLikeFromTweet($_POST['likeId']);
     }
@@ -34,7 +38,7 @@ if (isset($_POST['likeId'])) {
             <label>
                 <textarea placeholder="What is happening?!" name="message" required></textarea>
                 <?php
-                // This method saves the data which has been written in the textarea and creates a tweet in the database accordingly
+                // This method checks if the data has been set and creates a tweet in the database accordingly
                 if (isset($_POST['message'])){
                     createTweet($_POST['message'], $uid);
                 }
@@ -50,9 +54,9 @@ if (isset($_POST['likeId'])) {
         <table>
             <?php
             // This method creates table data by retrieving tweet data from the database
-             $tweets = getAllTweets();
-             foreach($tweets as $tweet)
-             {
+            $tweets = getAllTweets();
+            foreach($tweets as $tweet)
+            {
                 ?>
                 <tr>
                     <td>
@@ -66,7 +70,9 @@ if (isset($_POST['likeId'])) {
                         ?>
                         <p class="userName"><?php echo '@' . $name ?></p>
                         <p class="time_posted"><?php echo $created_at ?></p>
-                        <?php if ($uid == $userData['id']): ?>
+                        <?php
+                        // This method checks if session user has the same id as the user id from the tweet, if so only show edit for those posts
+                        if ($uid == $userData['id']): ?>
                         <button onclick="editTweet(<?php echo $id ?>)" class="edit">Edit</button>
                         <?php endif; ?>
                     </td>
@@ -74,14 +80,14 @@ if (isset($_POST['likeId'])) {
                 <tr>
                     <td class="tweetText">
                         <form method="post" action="home.php">
-                        <?php
-                        $message = $tweet['message'];
+                            <?php
+                            $message = $tweet['message'];
 
-                        // This method checks if an image is set, if so it will be shown
-                        if (isset($tweet['image'])){
-                            echo $tweet['image'];
-                        }
-                        ?>
+                            // This method checks if an image is set, if so it will be shown
+                            if (isset($tweet['image'])){
+                                echo $tweet['image'];
+                            }
+                            ?>
                             <label id="<?php echo "textLabel" . $id?>" for="<?php echo "updateText" . $id?>"><?php echo str_repeat("&nbsp", 6) . $message?></label>
                             <input type="hidden" id="<?php echo "updateText" . $id?>" name="updatedTweet" value="<?php echo $message?>">
                             <input type="hidden" name="id" value="<?php echo $id?>">
@@ -103,6 +109,7 @@ if (isset($_POST['likeId'])) {
                            }
                        }
                        else {
+                           // Repeats a string four times, which is a whitespace here
                            echo str_repeat("&nbsp", 4);
                        }
                        ?>
