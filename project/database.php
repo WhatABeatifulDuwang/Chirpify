@@ -11,12 +11,12 @@ try {
     $conn = new PDO("mysql:host=$dbServername;dbname=$dbName", $dbUsername, $dbPassword);
 } catch (PDOException $e) {}
 
-function createUser($username, $email, $password, $avatar = null, $admin = 0) {
+function createUser($username, $email, $password, $bio, $avatar = null, $admin = 0) {
     global $conn;
 
     try {
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password, avatar, admin) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$username, $email, $password, $avatar, $admin]);
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password, bio, avatar, admin) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$username, $email, $password, $bio, $avatar, $admin]);
         return $conn->lastInsertId();
     } catch (PDOException $e) {
         return false;

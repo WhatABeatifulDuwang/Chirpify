@@ -16,7 +16,7 @@
             <!-- <div class="logo"> 
                     <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo"> 
                 </div> -->
-                <h2>Log Into Chirpify</h2> 
+                <h2>Create a new Chirpify account</h2> 
                
                 <?php
                 //custom alert
@@ -31,26 +31,31 @@
                     $username = $_POST["username"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];
-        
-                    //create user 
-                    createUser($username,'',$email,$password,$avatar);
-                    // navigate to home screen 
+
+                    $allUsers = getAllUsers();
+                    foreach ($allUsers as $user){
+                        if ($user['email'] == $email){
+                            alert('The email already has been used');
+                        }else{
+                             //create user 
+                         createUser($username,$email,$password,null, $avatar);
+                         // navigate to home screen 
                         header("Location: parent-page.php");
                         exit();
                  }
+                        }
+                    }
+                   
                 ?>
                 <?php if ($showLoginForm): ?>
-                    <img class="avatar-circle" src= <?$avatar??'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-1024.png'?>
-                       
-                </img>
                     <form id="SignUpForm" method="post">
                        <br>
                        <div>
-                      <input type="text" id="avatar" name="avatar" placeholder="Avatar URL"> 
+                      <input type="text" id="avatar" name="avatar" placeholder="Enter an optional avatar URL"> 
                       <input type="text" id="username" name="username" placeholder="Username"> 
                        <input type="text" id="email" name="email" placeholder="Enter your email"> 
                        <input type="password" id="password" name="password" placeholder="Enter your password"> 
-                       <input type="submit" value="Login" class="btn btn-primary" name="Submitted"> 
+                       <input type="submit" value="Create" class="btn btn-primary" name="Submitted"> 
                        </div> 
                     </br>
                     </form>
