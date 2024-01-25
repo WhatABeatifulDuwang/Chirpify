@@ -13,9 +13,9 @@
     <div> 
         <div class="login-box">          
             <div class="container">
-            <div class="logo"> 
+            <!-- <div class="logo"> 
                     <img src="../assets/imgs/logo_no_bg.png" alt="Chirpify Logo"> 
-                </div>
+                </div> -->
                 <h2>Log Into Chirpify</h2> 
                
                 <?php
