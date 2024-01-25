@@ -23,6 +23,11 @@
                 session_start();
                 $showLoginForm = true;
 
+                $allUsers = getAllUsers();
+                foreach ($allUsers as $user){
+                        $emailCheck = $user['email'];
+                }
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
@@ -30,14 +35,17 @@
                     $validUsername = $user['username'];
                     $validPassword = $user['password'];
 
+                    if ($emailCheck != $username||$username!=''){
+                        echo "<div style = 'color:red'>There is no account like this in our records</div>";
+                        }
+
                     if ($username == $validUsername && $password == $validPassword) {
                         $userId = getUserByNameAsId($username, $password);
                         $_SESSION["user"] = $userId;
                         header("Location: parent-page.php");
                         exit();
-                    } else {
-                       
-                    }
+                    } 
+
                 }
                 ?>
                 <?php if ($showLoginForm): ?>
