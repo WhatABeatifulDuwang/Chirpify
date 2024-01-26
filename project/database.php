@@ -9,10 +9,12 @@ $dbName = "chirpify";
 // Creating the connection with the database
 try {
     $conn = new PDO("mysql:host=$dbServername;dbname=$dbName", $dbUsername, $dbPassword);
+    // Creates a database if it does not exist
     $sql = "CREATE DATABASE IF NOT EXISTS chirpify";
     $conn->exec($sql);
     $sql = "use chirpify";
     $conn->exec($sql);
+    // Creates the table users if it does not exist
     $sql = "CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(50) NOT NULL,
@@ -24,6 +26,7 @@ try {
             UNIQUE (username, email)
             )";
     $conn->exec($sql);
+    // Creates the tweet table if it does not exist
     $sql = "CREATE TABLE IF NOT EXISTS tweets (
             id INT AUTO_INCREMENT PRIMARY KEY,
             message VARCHAR(255) NOT NULL,
@@ -33,6 +36,19 @@ try {
             likes INT DEFAULT 0,
             liked_by_user_id INT DEFAULT NULL,
             FOREIGN KEY (user) REFERENCES users(id)
+            )";
+    // Creates a table with foreign keys from both tables to look up the tweets which got liked
+    $conn->exec($sql);
+    $sql = "CREATE TABLE IF NOT EXISTS liked_tweets (
+            tweet_id INT NOT NULL,
+            user_id INT NOT NULL,
+            PRIMARY KEY(tweet_id, user_id),
+            CONSTRAINT fk_tweets
+                FOREIGN KEY (tweet_id)
+                REFERENCES tweets(id) ON DELETE CASCADE,
+            CONSTRAINT fk_users
+                FOREIGN KEY (user_id)
+                REFERENCES users(id) ON DELETE CASCADE
             )";
     $conn->exec($sql);
 } catch (PDOException $e) {}
@@ -197,6 +213,18 @@ function addLikeToTweet($tweetId){
     }
 }
 
+function insertLikedUser($tweetId, $userId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("INSERT INTO liked_tweets (tweet_id, user_id) VALUES (?, ?)");
+        $stmt->execute([$tweetId, $userId]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
 // Removes a like from the database based on tweet id
 function removeLikeFromTweet($tweetId){
     global $conn;
@@ -204,6 +232,18 @@ function removeLikeFromTweet($tweetId){
     try {
         $stmt = $conn->prepare("UPDATE tweets SET likes = likes - 1, liked_by_user_id = null WHERE id = ?");
         $stmt->execute([$tweetId]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function removeLikedUser($tweetId, $userId){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("DELETE FROM liked_tweets WHERE tweet_id = ? AND user_id = ?");
+        $stmt->execute([$tweetId, $userId]);
         return true;
     } catch (PDOException $e) {
         return false;

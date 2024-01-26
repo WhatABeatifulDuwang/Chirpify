@@ -16,11 +16,13 @@ if (isset($_POST['likeId'])) {
     if ($userIdByLike['liked_by_user_id'] != $uid ){
         addLikeToTweet($_POST['likeId']);
         updateLikedUserId($uid, $_POST['likeId']);
+        insertLikedUser($_POST['likeId'], $uid);
         $imageUrl = "../assets/icons/heart-full-icon.png"; 
     }
     // If the id from the session is the same, it will remove a like from the database
     else{
         removeLikeFromTweet($_POST['likeId']);
+        removeLikedUser($_POST['likeId'], $uid);
         $imageUrl = "../assets/icons/heart-empty-icon.png"; 
     }
 }
