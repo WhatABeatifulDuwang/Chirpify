@@ -33,14 +33,13 @@
                 $email = $_POST["email"];
                 $password = $_POST["password"];
 
-
-
                 if ($emailCheck == $email){
                     echo "<div style = 'color:red'>The email already has been used</div>";
-                } else{
+                } else {
                     //create user
-                    createUser($username,$email,$password,null, $avatar);
-                    $userId = getUserByNameAsId($username, $password);
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    createUser($username,$email,$hashedPassword,null, $avatar);
+                    $userId = getUserByNameAsId($username, $hashedPassword);
                     $_SESSION["user"] = $userId;
                     // navigate to home screen
                     header("Location: parent-page.php");

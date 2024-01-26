@@ -28,9 +28,14 @@
                     $errorTextTag = "<div></div>";
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-                    $user = getUserByNameAsId($username, $password);
+                    $user = getUserByUsername($username);
 
-                    if (!$user){
+                    if (password_verify($password, $user['password'])) {
+                        $userId = getUserIdByUsername($username);
+                        $_SESSION["user"] = $userId;
+                        header("Location: parent-page.php");
+                        exit();
+                    } else {
                         $errorTextTag = "<div style='color:red' id='errorTextTag'>There is no account like this in our records. Please re-check the password and username and try again</div>";
                         echo $errorTextTag;
                         echo "<script>
@@ -38,16 +43,6 @@
                                 document.getElementById('errorTextTag').innerHTML = '<div></div>';
                             }, 2000);
                           </script>";
-                    } else{
-                        $validUsername = $user['username'];
-                        $validPassword = $user['password'];
-
-                        if ($username == $validUsername && $password == $validPassword) {
-                            $userId = getUserByNameAsId($username, $password);
-                            $_SESSION["user"] = $userId;
-                            header("Location: parent-page.php");
-                            exit();
-                        }
                     }
                 }
                 ?>

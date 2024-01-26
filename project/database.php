@@ -85,6 +85,30 @@ function getUserByNameAsId($username, $password) {
     }
 }
 
+function getUserByUsername($username) {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getUserIdByUsername($username) {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
 function getAllUsers() {
     global $conn;
 
