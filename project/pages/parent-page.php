@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']['id']) || empty($_SESSION['user']['id'])) {
 
 if (isset($_POST['logout'])) {
     unset($_SESSION['user']['id']);
-    header('Location: login_page.php');
+    header('Location: ../index.php');
     exit();
 }
 ?>
