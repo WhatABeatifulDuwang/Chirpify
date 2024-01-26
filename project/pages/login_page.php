@@ -30,7 +30,7 @@
                     $password = $_POST["password"];
                     $user = getUserByUsername($username);
 
-                    if (password_verify($password, $user['password'])) {
+                    if ($user &&password_verify($password, $user['password'])) {
                         $userId = getUserIdByUsername($username);
                         $_SESSION["user"] = $userId;
                         header("Location: parent-page.php");

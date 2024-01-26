@@ -9,6 +9,32 @@ $dbName = "chirpify";
 // Creating the connection with the database
 try {
     $conn = new PDO("mysql:host=$dbServername;dbname=$dbName", $dbUsername, $dbPassword);
+    $sql = "CREATE DATABASE IF NOT EXISTS chirpify";
+    $conn->exec($sql);
+    $sql = "use chirpify";
+    $conn->exec($sql);
+    $sql = "CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            bio VARCHAR(255) DEFAULT NULL,
+            avatar VARCHAR(255) DEFAULT NULL,
+            admin INT DEFAULT 0,
+            UNIQUE (username, email)
+            )";
+    $conn->exec($sql);
+    $sql = "CREATE TABLE IF NOT EXISTS tweets (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            message VARCHAR(255) NOT NULL,
+            image VARCHAR(255) DEFAULT NULL,
+            user INT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+            likes INT DEFAULT 0,
+            liked_by_user_id INT DEFAULT NULL,
+            FOREIGN KEY (user) REFERENCES users(id)
+            )";
+    $conn->exec($sql);
 } catch (PDOException $e) {}
 
 function createUser($username, $email, $password, $bio, $avatar = null, $admin = 0) {
@@ -103,6 +129,18 @@ function getUserIdByUsername($username) {
     try {
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
         $stmt->execute([$username]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function getUsernameById($userId) {
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return false;

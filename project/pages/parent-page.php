@@ -52,7 +52,7 @@ if (isset($_POST['logout'])) {
             </div>
         </li>
         <form method="post">
-        <li><button type="submit" name="logout" id="post">logout</button></li>
+        <li><button type="submit" name="logout" id="post">Log out</button></li>
         </form>
     </ul>
 </nav>

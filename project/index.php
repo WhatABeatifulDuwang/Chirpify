@@ -12,9 +12,10 @@
     <title>©Chirpify|Signin</title>
 </head>
 <body>
-<?php
+<?php include_once('database.php');
+            $hashedPassword = password_hash('admin', PASSWORD_DEFAULT);
+            createUser('admin','admin@admin.nl', $hashedPassword, 'I am the admin of this site', null, 1);
             session_start();
-                // verwijder de html error tag na 2 seconden 
                 if ($_SESSION!=null) {
                           header("Location: pages/parent-page.php");
                           exit();

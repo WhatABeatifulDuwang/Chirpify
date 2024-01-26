@@ -11,7 +11,8 @@ if (isset($_POST['submit'])){
     $_SESSION['user']['username'] = $newUsername;
 }
 
-$currentUsername = $_SESSION['user']['username'];
+$user = getUsernameById($uid);
+$currentUsername = $user['username'];
 
 // If the submit button for like has been pressed, updates the database
 if (isset($_POST['likeId'])) {

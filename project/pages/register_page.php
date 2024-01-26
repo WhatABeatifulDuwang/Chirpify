@@ -53,7 +53,7 @@
                     <div>
                         <input type="text" id="avatar" name="avatar" placeholder="Enter an optional avatar URL">
                         <input type="text" id="username" name="username" placeholder="Username">
-                        <input type="text" id="email" name="email" placeholder="Enter your email">
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
                         <input type="password" id="password" name="password" placeholder="Enter your password">
                         <input type="submit" value="Create" class="btn btn-primary" name="Submitted">
                     </div>
