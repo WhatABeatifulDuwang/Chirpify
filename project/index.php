@@ -15,7 +15,7 @@
 <?php
             session_start();
                 // verwijder de html error tag na 2 seconden 
-                if ($_SESSION!=null) {
+                if (!empty($_SESSION['user']['id'])) {
                           header("Location: pages/parent-page.php");
                           exit();
                         }
