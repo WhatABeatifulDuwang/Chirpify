@@ -13,14 +13,24 @@
 </head>
 <body>
 <?php include_once('database.php');
-            $hashedPassword = password_hash('admin', PASSWORD_DEFAULT);
-            createUser('admin','admin@admin.nl', $hashedPassword, 'I am the admin of this site', null, 1);
-            session_start();
-                if (!empty($_SESSION['user']['id'])) {
-                    header("Location: pages/parent-page.php");
-                    exit();
-                }
-            ?>
+
+// Creates an admin account for admin purposes. It is created only once.
+function createAdmin(){
+    static $isCreated = false;
+    if (!$isCreated){
+        $isCreated = true;
+        $hashedPassword = password_hash('admin', PASSWORD_DEFAULT);
+        createUser('admin','admin@admin.nl', $hashedPassword, 'I am the admin of this site', null, 1);
+    }
+}
+
+session_start();
+if (!empty($_SESSION['user']['id'])) {
+    createAdmin();
+    header("Location: pages/parent-page.php");
+    exit();
+}
+?>
     <script src="./dependencies/scripts/index_script.js"></script>
     <section class="main-login-section" id="login">
         <div class="login-sect-1 col-12 col-lg-6 d-none d-lg-block justify-content-center align-content-center">
