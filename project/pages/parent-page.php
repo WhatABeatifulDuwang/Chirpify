@@ -1,4 +1,4 @@
-<?php
+<?php include('../database.php');
 session_start();
 if (!isset($_SESSION['user']['id']) || empty($_SESSION['user']['id'])) {
     header('Location: login_page.php');
@@ -42,7 +42,10 @@ if (isset($_POST['logout'])) {
                 <img class="icon" src="../assets/imgs/elipsis-icon.png" alt="elipsis-icon">
                 <button>More</button>
                 <div class="dropdown-content">
+                    <?php
+                    if (isCurrentUserAdmin()): ?>
                     <a><button onclick="showPage('../pages/manage.php')">Manage</button></a>
+                    <?php endif; ?>
                     <form method="post">
                     <a><button type="submit" name="logout">Logout</button></a>
                     </form>
