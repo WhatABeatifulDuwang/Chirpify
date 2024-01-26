@@ -40,6 +40,7 @@
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                     createUser($username,$email,$hashedPassword,null, $avatar);
                     $userId = getUserByNameAsId($username, $hashedPassword);
+                    setFirstAccountAsAdmin();
                     $_SESSION["user"] = $userId;
                     // navigate to home screen
                     header("Location: parent-page.php");

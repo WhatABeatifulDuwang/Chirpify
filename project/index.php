@@ -12,21 +12,10 @@
     <title>©Chirpify|Sign in</title>
 </head>
 <body>
-<?php include_once('database.php');
-
-// Creates an admin account for admin purposes. It is created only once.
-function createAdmin(){
-    static $isCreated = false;
-    if (!$isCreated){
-        $isCreated = true;
-        $hashedPassword = password_hash('admin', PASSWORD_DEFAULT);
-        createUser('admin','admin@admin.nl', $hashedPassword, 'I am the admin of this site', null, 1);
-    }
-}
+<?php
 
 session_start();
 if (!empty($_SESSION['user']['id'])) {
-    createAdmin();
     header("Location: pages/parent-page.php");
     exit();
 }

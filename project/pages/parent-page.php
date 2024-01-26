@@ -26,14 +26,11 @@ if (isset($_POST['logout'])) {
     <nav>
     <ul>
         <li>
-            <img onclick="showPage('../pages/home.php')" class="icon" src="../assets/imgs/logo_no_bg.png" alt="bird-logo">
+            <button onclick="showPage('../pages/home.php')">
+            <img class="icon" src="../assets/imgs/house-icon-nobg.png" alt="house-icon"/>
+            Home
+            </button>
         </li>
-            <li>
-                <button onclick="showPage('../pages/home.php')">
-                <img class="icon" src="../assets/imgs/house-icon-nobg.png" alt="house-icon"/>
-                Home
-                </button>
-            </li>
         <li>
             <button onclick="showPage('../pages/profile-page.php')">
             <img class="icon" src="../assets/imgs/profile-icon.png" alt="profile-icon">
@@ -46,14 +43,12 @@ if (isset($_POST['logout'])) {
                 <button>More</button>
                 <div class="dropdown-content">
                     <a><button onclick="showPage('../pages/manage.php')">Manage</button></a>
-                    <a href="#">Lorem Ipsum</a>
-                    <a href="#">Lorem Ipsum</a>
+                    <form method="post">
+                    <a><button type="submit" name="logout">Logout</button></a>
+                    </form>
                 </div>
             </div>
         </li>
-        <form method="post">
-        <li><button type="submit" name="logout" id="post">Log out</button></li>
-        </form>
     </ul>
 </nav>
     </div>

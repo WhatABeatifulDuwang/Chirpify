@@ -67,7 +67,6 @@ function createUser($username, $email, $password, $bio, $avatar = null, $admin =
     }
 }
 
-
 function createTweet($message, $user, $image = null) {
     global $conn;
 
@@ -326,6 +325,18 @@ function editUserprofileWithAdmin($username, $bio, $userId, $admin) {
     try {
         $stmt = $conn->prepare("UPDATE users SET username = ?, bio = ?, admin = ? WHERE id = ?");
         $stmt->execute([$username, $bio, $admin, $userId]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function setFirstAccountAsAdmin(){
+    global $conn;
+
+    try {
+        $stmt = $conn->prepare("UPDATE users SET admin = 1 WHERE id = 1");
+        $stmt->execute();
         return true;
     } catch (PDOException $e) {
         return false;
