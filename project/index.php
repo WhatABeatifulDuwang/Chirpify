@@ -9,17 +9,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dependencies/styles/index_style.css">
-    <title>©Chirpify|Signin</title>
+    <title>©Chirpify|Sign in</title>
 </head>
 <body>
 <?php include_once('database.php');
             $hashedPassword = password_hash('admin', PASSWORD_DEFAULT);
             createUser('admin','admin@admin.nl', $hashedPassword, 'I am the admin of this site', null, 1);
             session_start();
-                if ($_SESSION!=null) {
-                          header("Location: pages/parent-page.php");
-                          exit();
-                        }
+                if (!empty($_SESSION['user']['id'])) {
+                    header("Location: pages/parent-page.php");
+                    exit();
+                }
             ?>
     <script src="./dependencies/scripts/index_script.js"></script>
     <section class="main-login-section" id="login">
